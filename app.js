@@ -146,12 +146,12 @@ var billCreateComponent = Vue.extend({
         {{ bill.done | doneLabel }}
       </span>
       <br/><br/>
-      <input type="submit" value="{{ formAction == 'create' ? 'Adicionar' : 'Alterar' }}"/>
+      <input type="submit" value="{{ action == 'create' ? 'Adicionar' : 'Alterar' }}"/>
     </form>
   `,
   props: [
     'bill',
-    'formAction'
+    'action'
   ],
   data: function () {
     return {
@@ -168,11 +168,11 @@ var billCreateComponent = Vue.extend({
   },
   methods: {
     submit: function () {
-      if (this.formAction == 'create') {
-        this.$parent.$children[1].bills.push(this.bill);
+      if (this.action == 'create') {
+        this.$parent.$refs.billListComponent.bills.push(this.bill);
       }
 
-      this.$parent.bill = {
+      this.bill = {
         date_due: '',
         name: '',
         value: 0,
@@ -211,11 +211,11 @@ var appComponent = Vue.extend({
     <menu-component></menu-component>
 
     <div v-show="activedView == 0">
-      <bill-list-component></bill-list-component>
+      <bill-list-component v-ref:bill-list-component></bill-list-component>
     </div>
 
     <div v-show="activedView == 1">
-      <bill-create-component v-bind:bill="bill" v-bind:form-action="formAction"></bill-create-component>
+      <bill-create-component v-ref:bill-create-component :bill.sync="bill" :action="formAction"></bill-create-component>
     </div>
   `,
   data: function () {
@@ -228,7 +228,7 @@ var appComponent = Vue.extend({
         name: '',
         value: 0,
         done: false
-      },
+      }
     }
   }
 });
