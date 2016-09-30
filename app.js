@@ -3,12 +3,12 @@ Vue.filter('doneLabel', function (done) {
 });
 
 Vue.filter('statusLabel', function (status) {
-  if (status.count == 0) {
-    return "<span class=\"empty\">Nenhuma conta cadastrada.</span>";
-  } else if (status.open_count == 0) {
-    return "<span class=\"done\">Nenhuma conta a pagar</span>";
+  if (status.count === 0) {
+    return "Nenhuma conta cadastrada.";
+  } else if (status.pending === 0) {
+    return "Nenhuma conta a pagar";
   } else {
-    return "<span class=\"pending\">Existem " + status.open_count + " contas a serem pagas</span>";
+    return "Existem " + status.pending + " contas a serem pagas";
   }
 });
 
@@ -59,7 +59,7 @@ var app = new Vue({
 
       return {
         count: this.bills.length,
-        open_count: this.bills.length - done
+        pending: this.bills.length - done
       };
     }
   },

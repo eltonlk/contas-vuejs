@@ -29,7 +29,9 @@
     </nav>
 
     <div v-if="activedView == 0">
-      <p>{{{ status | statusLabel }}}</p>
+      <p :class="{ 'empty': status.count === 0, 'pending': status.pending > 0, 'done': status.count > 0 && status.pending === 0 }">
+        {{ status | statusLabel }}
+      </p>
 
       <table border="1" cellpadding="10">
         <thead>
