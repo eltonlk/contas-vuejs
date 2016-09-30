@@ -35,7 +35,7 @@ var menuComponent = Vue.extend({
       this.$parent.activedView = id;
 
       if (id == 1) {
-        this.$parent.action = 'create';
+        this.$parent.formAction = 'create';
         this.$parent.bill = {
           date_due: '',
           name: '',
@@ -46,8 +46,6 @@ var menuComponent = Vue.extend({
     }
   }
 });
-
-Vue.component('menu-component', menuComponent);
 
 var billListComponent = Vue.extend({
   template: `
@@ -129,8 +127,6 @@ var billListComponent = Vue.extend({
   }
 });
 
-Vue.component('bill-list-component', billListComponent);
-
 var billCreateComponent = Vue.extend({
   template: `
     <form name="form" @submit.prevent="submit">
@@ -173,24 +169,27 @@ var billCreateComponent = Vue.extend({
   methods: {
     submit: function () {
       if (this.formAction == 'create') {
-        this.bills.push(this.bill);
+        this.$parent.$children[1].bills.push(this.bill);
       }
 
-      this.bill = {
+      this.$parent.bill = {
         date_due: '',
         name: '',
         value: 0,
         done: false
       };
 
-      this.activedView = 0;
+      this.$parent.activedView = 0;
     }
   }
 });
 
-Vue.component('bill-create-component', billCreateComponent);
-
 var appComponent = Vue.extend({
+  components: {
+    'menu-component': menuComponent,
+    'bill-list-component': billListComponent,
+    'bill-create-component': billCreateComponent
+  },
   template: `
     <style type="text/css">
       .destroy {
@@ -211,11 +210,11 @@ var appComponent = Vue.extend({
 
     <menu-component></menu-component>
 
-    <div v-if="activedView == 0">
+    <div v-show="activedView == 0">
       <bill-list-component></bill-list-component>
     </div>
 
-    <div v-if="activedView == 1">
+    <div v-show="activedView == 1">
       <bill-create-component v-bind:bill="bill" v-bind:form-action="formAction"></bill-create-component>
     </div>
   `,
