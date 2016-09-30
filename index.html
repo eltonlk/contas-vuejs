@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <title>Code Contas</title>
     <style type="text/css">
-      .pago {
-        color: green;
-      }
-      .nao-pago {
+      .destroy {
         color: red;
       }
-      .minha-classe {
-        background-color: #F0F0F0;
+      .empty {
+        color: grey;
+      }
+      .pending {
+        color: red;
+      }
+      .done {
+        color: green;
       }
     </style>
   </head>
   <body id="app">
-    <h1>
-      {{ title }}
-      <small>- {{ status }}</small>
-    </h1>
+    <h1>{{ title }}</h1>
     <nav>
       <ul>
         <li v-for="menu in menus">
@@ -29,6 +29,8 @@
     </nav>
 
     <div v-if="activedView == 0">
+      <p>{{{ status | statusLabel }}}</p>
+
       <table border="1" cellpadding="10">
         <thead>
           <tr>
@@ -36,7 +38,7 @@
             <th>Vencimento</th>
             <th>Nome</th>
             <th>Valor</th>
-            <th>Paga</th>
+            <th>Situação</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -46,11 +48,15 @@
             <td>{{ bill.date_due }}</td>
             <td>{{ bill.name }}</td>
             <td>{{ bill.value | currency 'R$ ' }}</td>
-            <td class="minha-classe" :class="{'pago': bill.done, 'nao-pago': !bill.done}">
-              {{ bill.done | doneLabel }}
+            <td :class="{'done': bill.done, 'pending': !bill.done}">
+              <label>
+                <input type="checkbox" v-model="bill.done"/>
+                {{ bill.done | doneLabel }}
+              <label>
             </td>
             <td>
-              <a href="#" @click.prevent="loadBill(bill)">Editar</a>
+              <a href="#" @click.prevent="loadBill(bill)">Editar</a> |
+              <a href="#" @click.prevent="destroyBill(bill)" class="destroy">Excluir</a>
             </td>
           </tr>
         </thead>
@@ -69,6 +75,12 @@
         <br/><br/>
         <label>Valor:<label>
         <input type="text" v-model="bill.value"/>
+
+        <br/><br/>
+        <label>Situação:<label>
+        <span :class="{'done': bill.done, 'pending': !bill.done}">
+          {{ bill.done | doneLabel }}
+        </span>
         <br/><br/>
         <input type="submit" value="Enviar"/>
       </form>
