@@ -35,7 +35,13 @@ var menuComponent = Vue.extend({
       this.$parent.activedView = id;
 
       if (id == 1) {
-        this.$parent.formType = 'insert';
+        this.$parent.action = 'create';
+        this.$parent.bill = {
+          date_due: '',
+          name: '',
+          value: 0,
+          done: false
+        };
       }
     }
   }
@@ -45,21 +51,6 @@ Vue.component('menu-component', menuComponent);
 
 var billListComponent = Vue.extend({
   template: `
-    <style type="text/css">
-      .destroy {
-        color: red;
-      }
-      .empty {
-        color: grey;
-      }
-      .pending {
-        color: red;
-      }
-      .done {
-        color: green;
-      }
-    </style>
-
     <p :class="{ 'empty': status.count === 0, 'pending': status.pending > 0, 'done': status.count > 0 && status.pending === 0 }">
       {{ status | statusLabel }}
     </p>
@@ -116,7 +107,7 @@ var billListComponent = Vue.extend({
     },
     loadBill: function (bill) {
       this.$parent.bill = bill;
-      this.$parent.formType = 'update';
+      this.$parent.formAction = 'update';
       this.$parent.activedView = 1;
     }
   },
@@ -140,49 +131,34 @@ var billListComponent = Vue.extend({
 
 Vue.component('bill-list-component', billListComponent);
 
-var appComponent = Vue.extend({
+var billCreateComponent = Vue.extend({
   template: `
-    <h1>{{ title }}</h1>
-
-    <menu-component></menu-component>
-
-    <div v-if="activedView == 0">
-      <bill-list-component></bill-list-component>
-    </div>
-
-    <div v-if="activedView == 1">
-      <form name="form" @submit.prevent="submit">
-        <label>Vencimento:<label>
-        <input type="text" v-model="bill.date_due"/>
-        <br/><br/>
-        <label>Nome:<label>
-        <select v-model="bill.name">
-          <option v-for="name in names" :value="name">{{ name }}</option>
-        </select>
-        <br/><br/>
-        <label>Valor:<label>
-        <input type="text" v-model="bill.value"/>
-        <br/><br/>
-        <label>Situação:<label>
-        <span :class="{'done': bill.done, 'pending': !bill.done}">
-          {{ bill.done | doneLabel }}
-        </span>
-        <br/><br/>
-        <input type="submit" value="Enviar"/>
-      </form>
-    </div>
+    <form name="form" @submit.prevent="submit">
+      <label>Vencimento:<label>
+      <input type="text" v-model="bill.date_due"/>
+      <br/><br/>
+      <label>Nome:<label>
+      <select v-model="bill.name">
+        <option v-for="name in names" :value="name">{{ name }}</option>
+      </select>
+      <br/><br/>
+      <label>Valor:<label>
+      <input type="text" v-model="bill.value"/>
+      <br/><br/>
+      <label>Situação:<label>
+      <span :class="{'done': bill.done, 'pending': !bill.done}">
+        {{ bill.done | doneLabel }}
+      </span>
+      <br/><br/>
+      <input type="submit" value="{{ formAction == 'create' ? 'Adicionar' : 'Alterar' }}"/>
+    </form>
   `,
+  props: [
+    'bill',
+    'formAction'
+  ],
   data: function () {
     return {
-      title: 'Contas a Pagar',
-      activedView: 0,
-      formType: 'insert',
-      bill: {
-        date_due: '',
-        name: '',
-        value: 0,
-        done: false
-      },
       names: [
         'Conta de luz',
         'Conta de água',
@@ -196,7 +172,7 @@ var appComponent = Vue.extend({
   },
   methods: {
     submit: function () {
-      if (this.formType == 'insert') {
+      if (this.formAction == 'create') {
         this.bills.push(this.bill);
       }
 
@@ -212,13 +188,59 @@ var appComponent = Vue.extend({
   }
 });
 
+Vue.component('bill-create-component', billCreateComponent);
+
+var appComponent = Vue.extend({
+  template: `
+    <style type="text/css">
+      .destroy {
+        color: red;
+      }
+      .empty {
+        color: grey;
+      }
+      .pending {
+        color: red;
+      }
+      .done {
+        color: green;
+      }
+    </style>
+
+    <h1>{{ title }}</h1>
+
+    <menu-component></menu-component>
+
+    <div v-if="activedView == 0">
+      <bill-list-component></bill-list-component>
+    </div>
+
+    <div v-if="activedView == 1">
+      <bill-create-component v-bind:bill="bill" v-bind:form-action="formAction"></bill-create-component>
+    </div>
+  `,
+  data: function () {
+    return {
+      title: 'Contas a Pagar',
+      activedView: 0,
+      formAction: 'create',
+      bill: {
+        date_due: '',
+        name: '',
+        value: 0,
+        done: false
+      },
+    }
+  }
+});
+
 Vue.component('app-component', appComponent);
 
 var app = new Vue({
   el: '#app'
 });
 
-//
+
 // app.$watch('teste', function (novo, velho) {
 //   console.log('velho valor: ' + velho + ', novo valor: ' + novo);
 // });
