@@ -12,9 +12,8 @@ Vue.filter('statusLabel', function (status) {
   }
 });
 
-var appComponent = Vue.extend({
+var menuComponent = Vue.extend({
   template: `
-    <h1>{{ title }}</h1>
     <nav>
       <ul>
         <li v-for="menu in menus">
@@ -22,6 +21,47 @@ var appComponent = Vue.extend({
         </li>
       </ul>
     </nav>
+  `,
+  data: function () {
+    return {
+      menus: [
+        { id: 0, text: 'Listar contas' },
+        { id: 1, text: 'Criar conta' }
+      ]
+    };
+  },
+  methods: {
+    showView: function (id) {
+      this.$parent.activedView = id;
+
+      if (id == 1) {
+        this.$parent.formType = 'insert';
+      }
+    }
+  }
+});
+
+Vue.component('menu-component', menuComponent);
+
+var appComponent = Vue.extend({
+  template: `
+    <style type="text/css">
+      .destroy {
+        color: red;
+      }
+      .empty {
+        color: grey;
+      }
+      .pending {
+        color: red;
+      }
+      .done {
+        color: green;
+      }
+    </style>
+    <h1>{{ title }}</h1>
+
+    <menu-component></menu-component>
 
     <div v-if="activedView == 0">
       <p :class="{ 'empty': status.count === 0, 'pending': status.pending > 0, 'done': status.count > 0 && status.pending === 0 }">
@@ -85,10 +125,6 @@ var appComponent = Vue.extend({
   data: function () {
     return {
       title: 'Contas a Pagar',
-      menus: [
-        { id: 0, text: 'Listar contas' },
-        { id: 1, text: 'Criar conta' }
-      ],
       activedView: 0,
       formType: 'insert',
       bills: [
@@ -143,13 +179,6 @@ var appComponent = Vue.extend({
       this.bill = bill;
       this.formType = 'update';
       this.activedView = 1;
-    },
-    showView: function (id) {
-      this.activedView = id;
-
-      if (id == 1) {
-        this.formType = 'insert';
-      }
     },
     submit: function () {
       if (this.formType == 'insert') {
