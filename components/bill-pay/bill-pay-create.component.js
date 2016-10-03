@@ -20,9 +20,6 @@ window.billPayCreateComponent = Vue.extend({
       <input type="submit" value="{{ action == 'create' ? 'Adicionar' : 'Alterar' }}"/>
     </form>
   `,
-  http: {
-    root: 'http://127.0.0.1:8000/api'
-  },
   data: function () {
     return {
       action: 'create',
@@ -51,23 +48,23 @@ window.billPayCreateComponent = Vue.extend({
   },
   methods: {
     submit: function () {
-      var resource = this.$resource('bills{/id}');
+      var self = this;
 
       if (this.action == 'create') {
-        resource.save({}, this.bill_pay).then(function (response) {
-          this.$router.go({ name: 'bill-pay.list' });
+        BillPay.save({}, this.bill_pay).then(function (response) {
+          self.$router.go({ name: 'bill-pay.list' });
         });
       } else {
-        resource.update({ id: this.bill_pay.id }, this.bill_pay).then(function (response) {
-          this.$router.go({ name: 'bill-pay.list' });
+        BillPay.update({ id: this.bill_pay.id }, this.bill_pay).then(function (response) {
+          self.$router.go({ name: 'bill-pay.list' });
         });
       }
     },
     getBillPay: function (id) {
-      var resource = this.$resource('bills{/id}');
+      var self = this;
 
-      resource.get({ id: id }).then(function (response) {
-        this.bill_pay = response.data;
+      BillPay.get({ id: id }).then(function (response) {
+        self.bill_pay = response.data;
       });
     }
   }

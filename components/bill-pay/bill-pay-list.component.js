@@ -35,35 +35,30 @@ window.billPayListComponent = Vue.extend({
       </thead>
     </table>
   `,
-  http: {
-    root: 'http://127.0.0.1:8000/api'
-  },
   data: function () {
     return {
       bill_pays: []
     };
   },
   created: function () {
-    var resource = this.$resource('bills{/id}');
+    var self = this;
 
-    resource.query().then(function (response) {
-      this.bill_pays = response.data;
+    BillPay.query().then(function (response) {
+      self.bill_pays = response.data;
     });
   },
   methods: {
     changeDoneBillPay: function (bill_pay) {
       if (confirm('Deseja alterar a situação dessa conta?')) {
-        var resource = this.$resource('bills{/id}');
-
-        resource.update({ id: bill_pay.id }, bill_pay);
+        BillPay.update({ id: bill_pay.id }, bill_pay);
       }
     },
     destroyBillPay: function (bill_pay) {
       if (confirm('Deseja excluir essa conta?')) {
-        var resource = this.$resource('bills{/id}');
+        var self = this;
 
-        resource.delete({ id: bill_pay.id }).then(function (response) {
-          this.bill_pays.$remove(bill_pay);
+        BillPay.delete({ id: bill_pay.id }).then(function (response) {
+          self.bill_pays.$remove(bill_pay);
         });
       }
     }
