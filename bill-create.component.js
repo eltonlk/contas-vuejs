@@ -47,8 +47,6 @@ window.billCreateComponent = Vue.extend({
       }
 
       this.resetBill();
-
-      this.$dispatch('change-activedview', 0);
     },
     resetBill: function () {
       this.bill = {

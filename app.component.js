@@ -28,14 +28,10 @@ window.appComponent = Vue.extend({
   `,
   data: function () {
     return {
-      title: 'Contas a Pagar',
-      activedView: 0
+      title: 'Contas a Pagar'
     }
   },
   events: {
-    'change-activedview': function (activedView) {
-      this.activedView = activedView;
-    },
     'change-bill': function (bill) {
       this.$broadcast('change-bill', bill);
     },
