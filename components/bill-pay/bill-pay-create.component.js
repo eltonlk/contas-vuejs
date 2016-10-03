@@ -20,6 +20,9 @@ window.billPayCreateComponent = Vue.extend({
       <input type="submit" value="{{ action == 'create' ? 'Adicionar' : 'Alterar' }}"/>
     </form>
   `,
+  http: {
+    root: 'http://127.0.0.1:8000/api'
+  },
   data: function () {
     return {
       action: 'create',
@@ -43,29 +46,25 @@ window.billPayCreateComponent = Vue.extend({
   created: function () {
     if (this.$route.name == 'bill-pay.update') {
       this.action = 'update';
-      this.getBillPay(this.$route.params.index);
+      this.getBillPay(this.$route.params.id);
     }
   },
   methods: {
     submit: function () {
       if (this.action == 'create') {
-        this.$root.$children[0].bill_pays.push(this.bill_pay);
+        this.$http.post('bills', this.bill_pay).then(function (response) {
+          this.$router.go({ name: 'bill-pay.list' });
+        });
+      } else {
+        this.$http.put('bills/' + this.bill_pay.id, this.bill_pay).then(function (response) {
+          this.$router.go({ name: 'bill-pay.list' });
+        });
       }
-
-      this.resetBillPay();
-
-      this.$router.go({ name: 'bill-pay.list' });
     },
-    getBillPay: function (index) {
-      this.bill_pay = this.$root.$children[0].bill_pays[index];
-    },
-    resetBillPay: function () {
-      this.bill_pay = {
-        date_due: '',
-        name: '',
-        value: 0,
-        done: false
-      };
+    getBillPay: function (id) {
+      this.$http.get('bills/' + id).then(function (response) {
+        this.bill_pay = response.data;
+      });
     }
   }
 });

@@ -28,7 +28,7 @@ window.billPayListComponent = Vue.extend({
             <label>
           </td>
           <td>
-            <a v-link="{ name: 'bill-pay.update', params: { index: index } }">Editar</a> |
+            <a v-link="{ name: 'bill-pay.update', params: { id: bill_pay.id } }">Editar</a> |
             <a href="#" @click.prevent="destroyBillPay(bill_pay)" class="destroy">Excluir</a>
           </td>
         </tr>
@@ -51,7 +51,9 @@ window.billPayListComponent = Vue.extend({
   methods: {
     destroyBillPay: function (bill_pay) {
       if (confirm('Deseja excluir essa conta?')) {
-        this.bill_pays.$remove(bill_pay);
+        this.$http.delete('bills/' + bill_pay.id).then(function (response) {
+          this.bill_pays.$remove(bill_pay);
+        });
       }
     }
   },
