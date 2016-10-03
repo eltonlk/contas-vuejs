@@ -1,7 +1,7 @@
 {
   "name": "vue.js",
   "version": "0.0.1",
-  "description": "",
+  "description": "Sistema de contas a pagar.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,11 @@
   "author": "Elton Luis Kolling",
   "license": "ISC",
   "dependencies": {
-    "vue": "^1.0.28"
+    "vue": "^1.0.28",
+    "vue-router": "^0.7.13"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:eltonlk/contas-vuejs.git"
   }
 }
