@@ -51,18 +51,22 @@ window.billPayCreateComponent = Vue.extend({
   },
   methods: {
     submit: function () {
+      var resource = this.$resource('bills{/id}');
+
       if (this.action == 'create') {
-        this.$http.post('bills', this.bill_pay).then(function (response) {
+        resource.save({}, this.bill_pay).then(function (response) {
           this.$router.go({ name: 'bill-pay.list' });
         });
       } else {
-        this.$http.put('bills/' + this.bill_pay.id, this.bill_pay).then(function (response) {
+        resource.update({ id: this.bill_pay.id }, this.bill_pay).then(function (response) {
           this.$router.go({ name: 'bill-pay.list' });
         });
       }
     },
     getBillPay: function (id) {
-      this.$http.get('bills/' + id).then(function (response) {
+      var resource = this.$resource('bills{/id}');
+
+      resource.get({ id: id }).then(function (response) {
         this.bill_pay = response.data;
       });
     }
