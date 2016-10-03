@@ -1,8 +1,6 @@
 window.appComponent = Vue.extend({
   components: {
-    'menu-component': menuComponent,
-    'bill-list-component': billListComponent,
-    'bill-create-component': billCreateComponent
+    'menu-component': menuComponent
   },
   template: `
     <style type="text/css">
@@ -29,11 +27,6 @@ window.appComponent = Vue.extend({
   data: function () {
     return {
       title: 'Contas a Pagar'
-    }
-  },
-  events: {
-    'change-bill': function (bill) {
-      this.$broadcast('change-bill', bill);
     }
   }
 });

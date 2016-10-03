@@ -17,7 +17,7 @@ window.billCreateComponent = Vue.extend({
         {{ bill.done | doneLabel }}
       </span>
       <br/><br/>
-      <input type="submit" value="Gravar"/>
+      <input type="submit" value="{{ action == 'create' ? 'Adicionar' : 'Alterar' }}"/>
     </form>
   `,
   data: function () {
@@ -40,6 +40,12 @@ window.billCreateComponent = Vue.extend({
       ]
     }
   },
+  created: function () {
+    if (this.$route.name == 'bill.update') {
+      this.action = 'update';
+      this.getBill(this.$route.params.index);
+    }
+  },
   methods: {
     submit: function () {
       if (this.action == 'create') {
@@ -50,6 +56,9 @@ window.billCreateComponent = Vue.extend({
 
       this.$router.go({ name: 'bill.list' });
     },
+    getBill: function (index) {
+      this.bill = this.$root.$children[0].bills[index];
+    },
     resetBill: function () {
       this.bill = {
         date_due: '',
@@ -57,11 +66,6 @@ window.billCreateComponent = Vue.extend({
         value: 0,
         done: false
       };
-    }
-  },
-  events: {
-    'change-bill': function (bill) {
-      this.bill = bill;
     }
   }
 });

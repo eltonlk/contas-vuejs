@@ -28,7 +28,7 @@ window.billListComponent = Vue.extend({
             <label>
           </td>
           <td>
-            <a href="#" @click.prevent="loadBill(bill)">Editar</a> |
+            <a v-link="{ name: 'bill.update', params: { index: index } }">Editar</a> |
             <a href="#" @click.prevent="destroyBill(bill)" class="destroy">Excluir</a>
           </td>
         </tr>
@@ -45,9 +45,6 @@ window.billListComponent = Vue.extend({
       if (confirm('Deseja excluir essa conta?')) {
         this.bills.$remove(bill);
       }
-    },
-    loadBill: function (bill) {
-      this.$dispatch('change-bill', bill);
     }
   },
   computed: {
