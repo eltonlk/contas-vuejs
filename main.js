@@ -21,15 +21,33 @@ router.map({
   },
   '/bill-receives': {
     name: 'bill-receive',
-    component: billReceiveComponent
+    component: billReceiveComponent,
+    subRoutes: {
+      '/': {
+        name: 'bill-receive.list',
+        component: billReceiveListComponent
+      },
+      '/create': {
+        name: 'bill-receive.create',
+        component: billReceiveCreateComponent
+      },
+      '/:index/update': {
+        name: 'bill-receive.update',
+        component: billReceiveCreateComponent
+      }
+    }
+  },
+  '/dashboard': {
+    name: 'dashboard',
+    component: dashboardComponent
   },
   '*': {
-    component: billPayListComponent
+    component: dashboardComponent
   }
 });
 
 router.redirect({
-  '*': '/bill-pays'
+  '*': '/dashboard'
 });
 
 router.start({

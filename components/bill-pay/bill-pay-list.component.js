@@ -1,7 +1,7 @@
 window.billPayListComponent = Vue.extend({
   template: `
     <p :class="{ 'empty': status.count === 0, 'pending': status.pending > 0, 'done': status.count > 0 && status.pending === 0 }">
-      {{ status | statusLabel }}
+      {{ status | billPaysStatusLabel }}
     </p>
 
     <table border="1" cellpadding="10">
@@ -16,20 +16,20 @@ window.billPayListComponent = Vue.extend({
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(index, bill) in bills">
+        <tr v-for="(index, bill_pay) in bill_pays">
           <td>{{ index + 1 }}</td>
-          <td>{{ bill.date_due }}</td>
-          <td>{{ bill.name }}</td>
-          <td>{{ bill.value | currency 'R$ ' }}</td>
-          <td :class="{'done': bill.done, 'pending': !bill.done}">
+          <td>{{ bill_pay.date_due }}</td>
+          <td>{{ bill_pay.name }}</td>
+          <td>{{ bill_pay.value | currency 'R$ ' }}</td>
+          <td :class="{'done': bill_pay.done, 'pending': !bill_pay.done}">
             <label>
-              <input type="checkbox" v-model="bill.done"/>
-              {{ bill.done | doneLabel }}
+              <input type="checkbox" v-model="bill_pay.done"/>
+              {{ bill_pay.done | billPayDoneLabel }}
             <label>
           </td>
           <td>
             <a v-link="{ name: 'bill-pay.update', params: { index: index } }">Editar</a> |
-            <a href="#" @click.prevent="destroyBill(bill)" class="destroy">Excluir</a>
+            <a href="#" @click.prevent="destroyBillPay(bill_pay)" class="destroy">Excluir</a>
           </td>
         </tr>
       </thead>
@@ -37,13 +37,13 @@ window.billPayListComponent = Vue.extend({
   `,
   data: function () {
     return {
-      bills: this.$root.$children[0].bills
+      bill_pays: this.$root.$children[0].bill_pays
     };
   },
   methods: {
-    destroyBill: function (bill) {
+    destroyBillPay: function (bill_pay) {
       if (confirm('Deseja excluir essa conta?')) {
-        this.bills.$remove(bill);
+        this.bill_pays.$remove(bill_pay);
       }
     }
   },
@@ -51,15 +51,15 @@ window.billPayListComponent = Vue.extend({
     status: function () {
       var done = 0;
 
-      for(var i in this.bills) {
-        if (this.bills[i].done) {
+      for(var i in this.bill_pays) {
+        if (this.bill_pays[i].done) {
           done++;
         }
       }
 
       return {
-        count: this.bills.length,
-        pending: this.bills.length - done
+        count: this.bill_pays.length,
+        pending: this.bill_pays.length - done
       };
     }
   }
