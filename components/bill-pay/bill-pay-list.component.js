@@ -23,7 +23,7 @@ window.billPayListComponent = Vue.extend({
           <td>{{ bill_pay.value | currency 'R$ ' }}</td>
           <td :class="{'done': bill_pay.done, 'pending': !bill_pay.done}">
             <label>
-              <input type="checkbox" v-model="bill_pay.done"/>
+              <input type="checkbox" v-model="bill_pay.done" @change="changeDoneBillPay(bill_pay)"/>
               {{ bill_pay.done | billPayDoneLabel }}
             <label>
           </td>
@@ -49,6 +49,11 @@ window.billPayListComponent = Vue.extend({
     });
   },
   methods: {
+    changeDoneBillPay: function (bill_pay) {
+      if (confirm('Deseja alterar a situação dessa conta?')) {
+        this.$http.put('bills/' + bill_pay.id, bill_pay);
+      }
+    },
     destroyBillPay: function (bill_pay) {
       if (confirm('Deseja excluir essa conta?')) {
         this.$http.delete('bills/' + bill_pay.id).then(function (response) {
