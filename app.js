@@ -32,16 +32,17 @@ var menuComponent = Vue.extend({
   },
   methods: {
     showView: function (id) {
-      this.$parent.activedView = id;
+      this.$dispatch('change-activedview', id);
 
       if (id == 1) {
-        this.$parent.formAction = 'create';
-        this.$parent.bill = {
+        this.$dispatch('change-formaction', 'create');
+
+        this.$dispatch('change-bill', {
           date_due: '',
           name: '',
           value: 0,
           done: false
-        };
+        });
       }
     }
   }
@@ -104,9 +105,9 @@ var billListComponent = Vue.extend({
       }
     },
     loadBill: function (bill) {
-      this.$parent.bill = bill;
-      this.$parent.formAction = 'update';
-      this.$parent.activedView = 1;
+      this.$dispatch('change-bill', bill);
+      this.$dispatch('change-activedview', 1);
+      this.$dispatch('change-formaction', 'update');
     }
   },
   computed: {
@@ -123,6 +124,11 @@ var billListComponent = Vue.extend({
         count: this.bills.length,
         pending: this.bills.length - done
       };
+    }
+  },
+  events: {
+    'new-bill': function (bill) {
+      this.bills.push(bill);
     }
   }
 });
@@ -149,12 +155,15 @@ var billCreateComponent = Vue.extend({
       <input type="submit" value="{{ action == 'create' ? 'Adicionar' : 'Alterar' }}"/>
     </form>
   `,
-  props: [
-    'bill',
-    'action'
-  ],
   data: function () {
     return {
+      action: 'create',
+      bill: {
+        date_due: '',
+        name: '',
+        value: 0,
+        done: false
+      },
       names: [
         'Conta de luz',
         'Conta de água',
@@ -169,17 +178,28 @@ var billCreateComponent = Vue.extend({
   methods: {
     submit: function () {
       if (this.action == 'create') {
-        this.$parent.$refs.billListComponent.bills.push(this.bill);
+        this.$dispatch('new-bill', this.bill);
       }
 
+      this.resetBill();
+
+      this.$dispatch('change-activedview', 0);
+    },
+    resetBill: function () {
       this.bill = {
         date_due: '',
         name: '',
         value: 0,
         done: false
       };
-
-      this.$parent.activedView = 0;
+    }
+  },
+  events: {
+    'change-formaction': function (action) {
+      this.action = action;
+    },
+    'change-bill': function (bill) {
+      this.bill = bill;
     }
   }
 });
@@ -215,20 +235,27 @@ var appComponent = Vue.extend({
     </div>
 
     <div v-show="activedView == 1">
-      <bill-create-component v-ref:bill-create-component :bill.sync="bill" :action="formAction"></bill-create-component>
+      <bill-create-component v-ref:bill-create-component></bill-create-component>
     </div>
   `,
   data: function () {
     return {
       title: 'Contas a Pagar',
-      activedView: 0,
-      formAction: 'create',
-      bill: {
-        date_due: '',
-        name: '',
-        value: 0,
-        done: false
-      }
+      activedView: 0
+    }
+  },
+  events: {
+    'change-activedview': function (activedView) {
+      this.activedView = activedView;
+    },
+    'change-bill': function (bill) {
+      this.$broadcast('change-bill', bill);
+    },
+    'change-formaction': function (action) {
+      this.$broadcast('change-formaction', action);
+    },
+    'new-bill': function (bill) {
+      this.$broadcast('new-bill', bill);
     }
   }
 });
