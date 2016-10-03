@@ -34,12 +34,6 @@ window.appComponent = Vue.extend({
   events: {
     'change-bill': function (bill) {
       this.$broadcast('change-bill', bill);
-    },
-    'change-formaction': function (action) {
-      this.$broadcast('change-formaction', action);
-    },
-    'new-bill': function (bill) {
-      this.$broadcast('new-bill', bill);
     }
   }
 });

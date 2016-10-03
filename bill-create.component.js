@@ -17,7 +17,7 @@ window.billCreateComponent = Vue.extend({
         {{ bill.done | doneLabel }}
       </span>
       <br/><br/>
-      <input type="submit" value="{{ action == 'create' ? 'Adicionar' : 'Alterar' }}"/>
+      <input type="submit" value="Gravar"/>
     </form>
   `,
   data: function () {
@@ -43,10 +43,12 @@ window.billCreateComponent = Vue.extend({
   methods: {
     submit: function () {
       if (this.action == 'create') {
-        this.$dispatch('new-bill', this.bill);
+        this.$root.$children[0].bills.push(this.bill);
       }
 
       this.resetBill();
+
+      this.$router.go({ name: 'bill.list' });
     },
     resetBill: function () {
       this.bill = {
@@ -58,9 +60,6 @@ window.billCreateComponent = Vue.extend({
     }
   },
   events: {
-    'change-formaction': function (action) {
-      this.action = action;
-    },
     'change-bill': function (bill) {
       this.bill = bill;
     }

@@ -15,12 +15,5 @@ window.menuComponent = Vue.extend({
         { text: 'Criar conta'  , routeName: 'bill.create' }
       ]
     };
-  },
-  methods: {
-    showView: function (id) {
-      if (id == 1) {
-        this.$dispatch('change-formaction', 'create');
-      }
-    }
   }
 });

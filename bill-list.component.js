@@ -48,7 +48,6 @@ window.billListComponent = Vue.extend({
     },
     loadBill: function (bill) {
       this.$dispatch('change-bill', bill);
-      this.$dispatch('change-formaction', 'update');
     }
   },
   computed: {
@@ -65,11 +64,6 @@ window.billListComponent = Vue.extend({
         count: this.bills.length,
         pending: this.bills.length - done
       };
-    }
-  },
-  events: {
-    'new-bill': function (bill) {
-      this.bills.push(bill);
     }
   }
 });
