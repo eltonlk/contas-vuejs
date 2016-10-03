@@ -27,12 +27,20 @@ window.dashboardComponent = Vue.extend({
       </tfoot>
     </table>
   `,
+  http: {
+    root: 'http://127.0.0.1:8000/api'
+  },
   data: function () {
     return {
       title: 'Dashboard',
-      bill_pays: this.$root.$children[0].bill_pays,
+      bill_pays: [],
       bill_receives: this.$root.$children[0].bill_receives
     };
+  },
+  created: function () {
+    this.$http.get('bills').then(function (response) {
+      this.bill_pays = response.data;
+    });
   },
   computed: {
     totalPaid: function () {

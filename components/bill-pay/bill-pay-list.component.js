@@ -35,10 +35,18 @@ window.billPayListComponent = Vue.extend({
       </thead>
     </table>
   `,
+  http: {
+    root: 'http://127.0.0.1:8000/api'
+  },
   data: function () {
     return {
-      bill_pays: this.$root.$children[0].bill_pays
+      bill_pays: []
     };
+  },
+  created: function () {
+    this.$http.get('bills').then(function (response) {
+      this.bill_pays = response.data;
+    });
   },
   methods: {
     destroyBillPay: function (bill_pay) {
