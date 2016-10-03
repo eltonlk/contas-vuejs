@@ -1,25 +1,35 @@
 var router = new VueRouter();
 
 router.map({
-  '/bills': {
-    name: 'bill.list',
-    component: billListComponent
+  '/bill-pays': {
+    name: 'bill-pay',
+    component: billPayComponent,
+    subRoutes: {
+      '/': {
+        name: 'bill-pay.list',
+        component: billPayListComponent
+      },
+      '/create': {
+        name: 'bill-pay.create',
+        component: billPayCreateComponent
+      },
+      '/:index/update': {
+        name: 'bill-pay.update',
+        component: billPayCreateComponent
+      }
+    }
   },
-  '/bill/create': {
-    name: 'bill.create',
-    component: billCreateComponent
-  },
-  '/bill/:index/update': {
-    name: 'bill.update',
-    component: billCreateComponent
+  '/bill-receives': {
+    name: 'bill-receive',
+    component: billReceiveComponent
   },
   '*': {
-    component: billListComponent
+    component: billPayListComponent
   }
 });
 
 router.redirect({
-  '*': '/bills'
+  '*': '/bill-pays'
 });
 
 router.start({

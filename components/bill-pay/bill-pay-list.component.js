@@ -1,4 +1,4 @@
-window.billListComponent = Vue.extend({
+window.billPayListComponent = Vue.extend({
   template: `
     <p :class="{ 'empty': status.count === 0, 'pending': status.pending > 0, 'done': status.count > 0 && status.pending === 0 }">
       {{ status | statusLabel }}
@@ -28,7 +28,7 @@ window.billListComponent = Vue.extend({
             <label>
           </td>
           <td>
-            <a v-link="{ name: 'bill.update', params: { index: index } }">Editar</a> |
+            <a v-link="{ name: 'bill-pay.update', params: { index: index } }">Editar</a> |
             <a href="#" @click.prevent="destroyBill(bill)" class="destroy">Excluir</a>
           </td>
         </tr>

@@ -1,11 +1,11 @@
 window.mainComponent = Vue.extend({
   components: {
-    'app-component': appComponent
+    'bill-component': billComponent
   },
   data: function () {
     return {
       bills: [
-        { date_due: '20/08/2016', name: 'Conta de luz'     , value: 175.98, done: true },
+        { date_due: '20/08/2016', name: 'Conta de luz'     , value: 175.98, done: true  },
         { date_due: '21/08/2016', name: 'Festas'           , value: 250.40, done: false },
         { date_due: '22/08/2016', name: 'Supermercado'     , value: 550.00, done: false },
         { date_due: '23/08/2016', name: 'Conta de telefone', value: 75.45 , done: false },
@@ -16,6 +16,6 @@ window.mainComponent = Vue.extend({
     };
   },
   template: `
-    <app-component></app-component>
+    <bill-component></bill-component>
   `
 });

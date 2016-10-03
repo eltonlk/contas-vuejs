@@ -3,6 +3,21 @@
   <head>
     <meta charset="UTF-8">
     <title>Contas a pagar</title>
+
+    <style type="text/css">
+      .destroy {
+        color: red;
+      }
+      .empty {
+        color: grey;
+      }
+      .pending {
+        color: red;
+      }
+      .done {
+        color: green;
+      }
+    </style>
   </head>
   <body id="app">
     <main-component></main-component>
@@ -10,10 +25,12 @@
     <script type="text/javascript" src="node_modules/vue/dist/vue.min.js"></script>
     <script type="text/javascript" src="node_modules/vue-router/dist/vue-router.min.js"></script>
     <script type="text/javascript" src="filters.js"></script>
-    <script type="text/javascript" src="components/bill-create.component.js"></script>
-    <script type="text/javascript" src="components/bill-list.component.js"></script>
-    <script type="text/javascript" src="components/menu.component.js"></script>
-    <script type="text/javascript" src="components/app.component.js"></script>
+    <script type="text/javascript" src="components/bill.component.js"></script>
+    <script type="text/javascript" src="components/bill-pay/bill-pay-create.component.js"></script>
+    <script type="text/javascript" src="components/bill-pay/bill-pay-list.component.js"></script>
+    <script type="text/javascript" src="components/bill-pay/bill-pay-menu.component.js"></script>
+    <script type="text/javascript" src="components/bill-pay/bill-pay.component.js"></script>
+    <script type="text/javascript" src="components/bill-receive/bill-receive.component.js"></script>
     <script type="text/javascript" src="components/main.component.js"></script>
     <script type="text/javascript" src="main.js"></script>
   </body>
