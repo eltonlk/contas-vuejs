@@ -27,14 +27,11 @@ window.dashboardComponent = Vue.extend({
       </tfoot>
     </table>
   `,
-  http: {
-    root: 'http://127.0.0.1:8000/api'
-  },
   data: function () {
     return {
       title: 'Dashboard',
-      bill_receives: this.$root.$children[0].bill_receives,
-      totalPays: 0
+      totalPays: 0,
+      totalReceives: 0
     };
   },
   created: function () {
@@ -43,16 +40,9 @@ window.dashboardComponent = Vue.extend({
     BillPay.total().then(function (response) {
       self.totalPays = response.data.total;
     });
-  },
-  computed: {
-    totalReceives: function () {
-      var total = 0;
 
-      for(var i in this.bill_receives) {
-        total += this.bill_receives[i].value;
-      }
-
-      return total;
-    }
+    BillReceive.total().then(function (response) {
+      self.totalReceives = response.data.total;
+    });
   }
 });

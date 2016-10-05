@@ -11,8 +11,8 @@ window.billReceiveMenuComponent = Vue.extend({
   data: function () {
     return {
       menus: [
-        { text: 'Listar contas', routeName: 'bill-pay.list'   },
-        { text: 'Criar conta'  , routeName: 'bill-pay.create' }
+        { text: 'Listar contas', routeName: 'bill-receive.list'   },
+        { text: 'Criar conta'  , routeName: 'bill-receive.create' }
       ]
     };
   }

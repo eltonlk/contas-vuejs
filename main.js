@@ -31,7 +31,7 @@ router.map({
         name: 'bill-receive.create',
         component: billReceiveCreateComponent
       },
-      '/:index/update': {
+      '/:id/update': {
         name: 'bill-receive.update',
         component: billReceiveCreateComponent
       }

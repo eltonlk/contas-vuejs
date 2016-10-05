@@ -23,12 +23,12 @@ window.billReceiveListComponent = Vue.extend({
           <td>{{ bill_receive.value | currency 'R$ ' }}</td>
           <td :class="{'done': bill_receive.done, 'pending': !bill_receive.done}">
             <label>
-              <input type="checkbox" v-model="bill_receive.done"/>
+              <input type="checkbox" v-model="bill_receive.done" @change="changeDoneBillReceive(bill_receive)"/>
               {{ bill_receive.done | billReceiveDoneLabel }}
             <label>
           </td>
           <td>
-            <a v-link="{ name: 'bill-receive.update', params: { index: index } }">Editar</a> |
+            <a v-link="{ name: 'bill-receive.update', params: { id: bill_receive.id } }">Editar</a> |
             <a href="#" @click.prevent="destroyBillReceive(bill_receive)" class="destroy">Excluir</a>
           </td>
         </tr>
@@ -37,13 +37,29 @@ window.billReceiveListComponent = Vue.extend({
   `,
   data: function () {
     return {
-      bill_receives: this.$root.$children[0].bill_receives
+      bill_receives: []
     };
   },
+  created: function () {
+    var self = this;
+
+    BillReceive.query().then(function (response) {
+      self.bill_receives = response.data;
+    });
+  },
   methods: {
+    changeDoneBillReceive: function (bill_receive) {
+      if (confirm('Deseja alterar a situação dessa conta?')) {
+        BillReceive.update({ id: bill_receive.id }, bill_receive);
+      }
+    },
     destroyBillReceive: function (bill_receive) {
-      if (confirm('Deseja excluir essa cobrança?')) {
-        this.bill_receives.$remove(bill_receive);
+      if (confirm('Deseja excluir essa conta?')) {
+        var self = this;
+
+        BillReceive.delete({ id: bill_receive.id }).then(function (response) {
+          self.bill_receives.$remove(bill_receive);
+        });
       }
     }
   },
