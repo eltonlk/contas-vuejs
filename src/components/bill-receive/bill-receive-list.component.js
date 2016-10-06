@@ -20,7 +20,7 @@ window.billReceiveListComponent = Vue.extend({
           <td>{{ index + 1 }}</td>
           <td>{{ bill_receive.date_due }}</td>
           <td>{{ bill_receive.name }}</td>
-          <td>{{ bill_receive.value | currency 'R$ ' }}</td>
+          <td>{{ bill_receive.value | numberToCurrency }}</td>
           <td :class="{'done': bill_receive.done, 'pending': !bill_receive.done}">
             <label>
               <input type="checkbox" v-model="bill_receive.done" @change="changeDoneBillReceive(bill_receive)"/>

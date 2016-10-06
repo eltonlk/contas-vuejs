@@ -20,7 +20,7 @@ window.billPayListComponent = Vue.extend({
           <td>{{ index + 1 }}</td>
           <td>{{ bill_pay.date_due }}</td>
           <td>{{ bill_pay.name }}</td>
-          <td>{{ bill_pay.value | currency 'R$ ' }}</td>
+          <td>{{ bill_pay.value | numberToCurrency }}</td>
           <td :class="{'done': bill_pay.done, 'pending': !bill_pay.done}">
             <label>
               <input type="checkbox" v-model="bill_pay.done" @change="changeDoneBillPay(bill_pay)"/>

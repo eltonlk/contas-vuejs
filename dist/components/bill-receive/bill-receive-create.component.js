@@ -1,9 +1,9 @@
 'use strict';
 
-var names = ['Salário', 'Serviços', '13º Salário', 'Férias'];
+var receiveNames = ['Salário', 'Serviços', '13º Salário', 'Férias'];
 
 window.billReceiveCreateComponent = Vue.extend({
-  template: '\n    <form name="form" @submit.prevent="submit">\n      <label>Vencimento:<label>\n      <input type="text" v-model="bill_receive.date_due"/>\n      <br/><br/>\n      <label>Nome:<label>\n      <select v-model="bill_receive.name">\n        <option v-for="name in names" :value="name">{{ name }}</option>\n      </select>\n      <br/><br/>\n      <label>Valor:<label>\n      <input type="text" v-model="bill_receive.value"/>\n      <br/><br/>\n      <label>Situação:<label>\n      <span :class="{\'done\': bill_receive.done, \'pending\': !bill_receive.done}">\n        {{ bill_receive.done | billReceiveDoneLabel }}\n      </span>\n      <br/><br/>\n      <input type="submit" value="{{ action == \'create\' ? \'Adicionar\' : \'Alterar\' }}"/>\n    </form>\n  ',
+  template: '\n    <form name="form" @submit.prevent="submit">\n      <label>Vencimento:<label>\n      <input type="text" v-model="bill_receive.date_due"/>\n      <br/><br/>\n      <label>Nome:<label>\n      <select v-model="bill_receive.name">\n        <option v-for="name in names" :value="name">{{ name }}</option>\n      </select>\n      <br/><br/>\n      <label>Valor:<label>\n      <input type="text" v-model="bill_receive.value | numberToCurrency"/>\n      <br/><br/>\n      <label>Situação:<label>\n      <span :class="{\'done\': bill_receive.done, \'pending\': !bill_receive.done}">\n        {{ bill_receive.done | billReceiveDoneLabel }}\n      </span>\n      <br/><br/>\n      <input type="submit" value="{{ action == \'create\' ? \'Adicionar\' : \'Alterar\' }}"/>\n    </form>\n  ',
   data: function data() {
     return {
       action: 'create',
@@ -13,7 +13,7 @@ window.billReceiveCreateComponent = Vue.extend({
         value: 0,
         done: false
       },
-      names: names
+      names: receiveNames
     };
   },
   created: function created() {

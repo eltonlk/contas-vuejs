@@ -1,4 +1,4 @@
-const names = [
+const payNames = [
   'Conta de luz',
   'Conta de água',
   'Conta de telefone',
@@ -20,7 +20,7 @@ window.billPayCreateComponent = Vue.extend({
       </select>
       <br/><br/>
       <label>Valor:<label>
-      <input type="text" v-model="bill_pay.value"/>
+      <input type="text" v-model="bill_pay.value | numberToCurrency"/>
       <br/><br/>
       <label>Situação:<label>
       <span :class="{'done': bill_pay.done, 'pending': !bill_pay.done}">
@@ -39,7 +39,7 @@ window.billPayCreateComponent = Vue.extend({
         value: 0,
         done: false
       },
-      names: names
+      names: payNames
     }
   },
   created () {

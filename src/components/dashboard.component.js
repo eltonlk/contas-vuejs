@@ -12,17 +12,17 @@ window.dashboardComponent = Vue.extend({
       <tbody>
         <tr>
           <td>Entrada</td>
-          <td>{{ totalReceives | currency }}</td>
+          <td>{{ totalReceives | numberToCurrency }}</td>
         </tr>
         <tr>
           <td>Saída</td>
-          <td>{{ totalPays | currency }}</td>
+          <td>{{ totalPays | numberToCurrency }}</td>
         </tr>
       </thead>
       <tfoot>
         <tr>
           <td>Saldo</td>
-          <td>{{ totalReceives - totalPays | currency }}</td>
+          <td>{{ totalReceives - totalPays | numberToCurrency }}</td>
         </tr>
       </tfoot>
     </table>

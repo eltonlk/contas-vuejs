@@ -1,4 +1,4 @@
-const names = [
+const receiveNames = [
   'Salário',
   'Serviços',
   '13º Salário',
@@ -17,7 +17,7 @@ window.billReceiveCreateComponent = Vue.extend({
       </select>
       <br/><br/>
       <label>Valor:<label>
-      <input type="text" v-model="bill_receive.value"/>
+      <input type="text" v-model="bill_receive.value | numberToCurrency"/>
       <br/><br/>
       <label>Situação:<label>
       <span :class="{'done': bill_receive.done, 'pending': !bill_receive.done}">
@@ -36,7 +36,7 @@ window.billReceiveCreateComponent = Vue.extend({
         value: 0,
         done: false
       },
-      names: names
+      names: receiveNames
     }
   },
   created () {
