@@ -8,12 +8,13 @@ window.billReceiveListComponent = Vue.extend({
     };
   },
   created: function created() {
-    var self = this;
+    var _this = this;
 
     BillReceive.query().then(function (response) {
-      self.bill_receives = response.data;
+      _this.bill_receives = response.data;
     });
   },
+
   methods: {
     changeDoneBillReceive: function changeDoneBillReceive(bill_receive) {
       if (confirm('Deseja alterar a situação dessa conta?')) {
@@ -21,16 +22,12 @@ window.billReceiveListComponent = Vue.extend({
       }
     },
     destroyBillReceive: function destroyBillReceive(bill_receive) {
-      var _this = this;
+      var _this2 = this;
 
       if (confirm('Deseja excluir essa conta?')) {
-        (function () {
-          var self = _this;
-
-          BillReceive.delete({ id: bill_receive.id }).then(function (response) {
-            self.bill_receives.$remove(bill_receive);
-          });
-        })();
+        BillReceive.delete({ id: bill_receive.id }).then(function (response) {
+          _this2.bill_receives.$remove(bill_receive);
+        });
       }
     }
   },

@@ -35,36 +35,32 @@ window.billReceiveListComponent = Vue.extend({
       </thead>
     </table>
   `,
-  data: function () {
+  data () {
     return {
       bill_receives: []
     };
   },
-  created: function () {
-    let self = this;
-
-    BillReceive.query().then(function (response) {
-      self.bill_receives = response.data;
+  created () {
+    BillReceive.query().then((response) => {
+      this.bill_receives = response.data;
     });
   },
   methods: {
-    changeDoneBillReceive: function (bill_receive) {
+    changeDoneBillReceive (bill_receive) {
       if (confirm('Deseja alterar a situação dessa conta?')) {
         BillReceive.update({ id: bill_receive.id }, bill_receive);
       }
     },
-    destroyBillReceive: function (bill_receive) {
+    destroyBillReceive (bill_receive) {
       if (confirm('Deseja excluir essa conta?')) {
-        let self = this;
-
-        BillReceive.delete({ id: bill_receive.id }).then(function (response) {
-          self.bill_receives.$remove(bill_receive);
+        BillReceive.delete({ id: bill_receive.id }).then((response) => {
+          this.bill_receives.$remove(bill_receive);
         });
       }
     }
   },
   computed: {
-    status: function () {
+    status () {
       let done = 0;
 
       for(let i in this.bill_receives) {

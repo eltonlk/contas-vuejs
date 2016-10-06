@@ -27,22 +27,20 @@ window.dashboardComponent = Vue.extend({
       </tfoot>
     </table>
   `,
-  data: function () {
+  data () {
     return {
       title: 'Dashboard',
       totalPays: 0,
       totalReceives: 0
     };
   },
-  created: function () {
-    let self = this;
-
-    BillPay.total().then(function (response) {
-      self.totalPays = response.data.total;
+  created () {
+    BillPay.total().then((response) => {
+      this.totalPays = response.data.total;
     });
 
-    BillReceive.total().then(function (response) {
-      self.totalReceives = response.data.total;
+    BillReceive.total().then((response) => {
+      this.totalReceives = response.data.total;
     });
   }
 });

@@ -10,14 +10,14 @@ window.dashboardComponent = Vue.extend({
     };
   },
   created: function created() {
-    var self = this;
+    var _this = this;
 
     BillPay.total().then(function (response) {
-      self.totalPays = response.data.total;
+      _this.totalPays = response.data.total;
     });
 
     BillReceive.total().then(function (response) {
-      self.totalReceives = response.data.total;
+      _this.totalReceives = response.data.total;
     });
   }
 });

@@ -9,7 +9,7 @@ window.billPayComponent = Vue.extend({
 
     <router-view></router-view>
   `,
-  data: function () {
+  data () {
     return {
       title: 'Contas a Pagar'
     }

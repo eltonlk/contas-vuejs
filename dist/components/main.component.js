@@ -7,5 +7,6 @@ window.mainComponent = Vue.extend({
       menus: [{ text: 'Dashboard', routeName: 'dashboard' }, { text: 'Contas a pagar', routeName: 'bill-pay' }, { text: 'Contas a receber', routeName: 'bill-receive' }]
     };
   },
+
   template: '\n    <nav>\n      <ul>\n        <li v-for="menu in menus">\n          <a v-link="{ name: menu.routeName }">{{ menu.text }}</a>\n        </li>\n      </ul>\n    </nav>\n\n    <router-view></router-view>\n  '
 });

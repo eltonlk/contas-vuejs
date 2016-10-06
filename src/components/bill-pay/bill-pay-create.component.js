@@ -30,7 +30,7 @@ window.billPayCreateComponent = Vue.extend({
       <input type="submit" value="{{ action == 'create' ? 'Adicionar' : 'Alterar' }}"/>
     </form>
   `,
-  data: function () {
+  data () {
     return {
       action: 'create',
       bill_pay: {
@@ -42,31 +42,27 @@ window.billPayCreateComponent = Vue.extend({
       names: names
     }
   },
-  created: function () {
+  created () {
     if (this.$route.name == 'bill-pay.update') {
       this.action = 'update';
       this.getBillPay(this.$route.params.id);
     }
   },
   methods: {
-    submit: function () {
-      let self = this;
-
+    submit () {
       if (this.action == 'create') {
-        BillPay.save({}, this.bill_pay).then(function (response) {
-          self.$router.go({ name: 'bill-pay.list' });
+        BillPay.save({}, this.bill_pay).then((response) => {
+          this.$router.go({ name: 'bill-pay.list' });
         });
       } else {
-        BillPay.update({ id: this.bill_pay.id }, this.bill_pay).then(function (response) {
-          self.$router.go({ name: 'bill-pay.list' });
+        BillPay.update({ id: this.bill_pay.id }, this.bill_pay).then((response) => {
+          this.$router.go({ name: 'bill-pay.list' });
         });
       }
     },
-    getBillPay: function (id) {
-      let self = this;
-
-      BillPay.get({ id: id }).then(function (response) {
-        self.bill_pay = response.data;
+    getBillPay (id) {
+      BillPay.get({ id: id }).then((response) => {
+        this.bill_pay = response.data;
       });
     }
   }

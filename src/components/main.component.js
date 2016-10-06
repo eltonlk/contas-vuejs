@@ -1,5 +1,5 @@
 window.mainComponent = Vue.extend({
-  data: function () {
+  data () {
     return {
       bill_receives: [
         { date_due: '19/08/2016', name: 'Conta de luz'     , value: 175.98, done: false },

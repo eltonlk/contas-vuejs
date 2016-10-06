@@ -8,12 +8,13 @@ window.billPayListComponent = Vue.extend({
     };
   },
   created: function created() {
-    var self = this;
+    var _this = this;
 
     BillPay.query().then(function (response) {
-      self.bill_pays = response.data;
+      _this.bill_pays = response.data;
     });
   },
+
   methods: {
     changeDoneBillPay: function changeDoneBillPay(bill_pay) {
       if (confirm('Deseja alterar a situação dessa conta?')) {
@@ -21,16 +22,12 @@ window.billPayListComponent = Vue.extend({
       }
     },
     destroyBillPay: function destroyBillPay(bill_pay) {
-      var _this = this;
+      var _this2 = this;
 
       if (confirm('Deseja excluir essa conta?')) {
-        (function () {
-          var self = _this;
-
-          BillPay.delete({ id: bill_pay.id }).then(function (response) {
-            self.bill_pays.$remove(bill_pay);
-          });
-        })();
+        BillPay.delete({ id: bill_pay.id }).then(function (response) {
+          _this2.bill_pays.$remove(bill_pay);
+        });
       }
     }
   },

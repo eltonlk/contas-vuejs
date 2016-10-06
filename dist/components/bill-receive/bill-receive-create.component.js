@@ -22,25 +22,26 @@ window.billReceiveCreateComponent = Vue.extend({
       this.getBillReceive(this.$route.params.id);
     }
   },
+
   methods: {
     submit: function submit() {
-      var self = this;
+      var _this = this;
 
       if (this.action == 'create') {
         BillReceive.save({}, this.bill_receive).then(function (response) {
-          self.$router.go({ name: 'bill-receive.list' });
+          _this.$router.go({ name: 'bill-receive.list' });
         });
       } else {
         BillReceive.update({ id: this.bill_receive.id }, this.bill_receive).then(function (response) {
-          self.$router.go({ name: 'bill-receive.list' });
+          _this.$router.go({ name: 'bill-receive.list' });
         });
       }
     },
     getBillReceive: function getBillReceive(id) {
-      var self = this;
+      var _this2 = this;
 
       BillReceive.get({ id: id }).then(function (response) {
-        self.bill_receive = response.data;
+        _this2.bill_receive = response.data;
       });
     }
   }

@@ -22,25 +22,26 @@ window.billPayCreateComponent = Vue.extend({
       this.getBillPay(this.$route.params.id);
     }
   },
+
   methods: {
     submit: function submit() {
-      var self = this;
+      var _this = this;
 
       if (this.action == 'create') {
         BillPay.save({}, this.bill_pay).then(function (response) {
-          self.$router.go({ name: 'bill-pay.list' });
+          _this.$router.go({ name: 'bill-pay.list' });
         });
       } else {
         BillPay.update({ id: this.bill_pay.id }, this.bill_pay).then(function (response) {
-          self.$router.go({ name: 'bill-pay.list' });
+          _this.$router.go({ name: 'bill-pay.list' });
         });
       }
     },
     getBillPay: function getBillPay(id) {
-      var self = this;
+      var _this2 = this;
 
       BillPay.get({ id: id }).then(function (response) {
-        self.bill_pay = response.data;
+        _this2.bill_pay = response.data;
       });
     }
   }

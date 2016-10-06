@@ -9,7 +9,7 @@ window.billReceiveComponent = Vue.extend({
 
     <router-view></router-view>
   `,
-  data: function () {
+  data () {
     return {
       title: 'Contas a Receber'
     }
