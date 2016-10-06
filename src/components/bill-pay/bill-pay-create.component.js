@@ -48,7 +48,7 @@ window.billPayCreateComponent = Vue.extend({
   },
   methods: {
     submit: function () {
-      var self = this;
+      let self = this;
 
       if (this.action == 'create') {
         BillPay.save({}, this.bill_pay).then(function (response) {
@@ -61,7 +61,7 @@ window.billPayCreateComponent = Vue.extend({
       }
     },
     getBillPay: function (id) {
-      var self = this;
+      let self = this;
 
       BillPay.get({ id: id }).then(function (response) {
         self.bill_pay = response.data;

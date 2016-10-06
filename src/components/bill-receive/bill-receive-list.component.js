@@ -41,7 +41,7 @@ window.billReceiveListComponent = Vue.extend({
     };
   },
   created: function () {
-    var self = this;
+    let self = this;
 
     BillReceive.query().then(function (response) {
       self.bill_receives = response.data;
@@ -55,7 +55,7 @@ window.billReceiveListComponent = Vue.extend({
     },
     destroyBillReceive: function (bill_receive) {
       if (confirm('Deseja excluir essa conta?')) {
-        var self = this;
+        let self = this;
 
         BillReceive.delete({ id: bill_receive.id }).then(function (response) {
           self.bill_receives.$remove(bill_receive);
@@ -65,9 +65,9 @@ window.billReceiveListComponent = Vue.extend({
   },
   computed: {
     status: function () {
-      var done = 0;
+      let done = 0;
 
-      for(var i in this.bill_receives) {
+      for(let i in this.bill_receives) {
         if (this.bill_receives[i].done) {
           done++;
         }

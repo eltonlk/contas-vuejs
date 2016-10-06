@@ -48,7 +48,7 @@ window.billReceiveCreateComponent = Vue.extend({
   },
   methods: {
     submit: function () {
-      var self = this;
+      let self = this;
 
       if (this.action == 'create') {
         BillReceive.save({}, this.bill_receive).then(function (response) {
@@ -61,7 +61,7 @@ window.billReceiveCreateComponent = Vue.extend({
       }
     },
     getBillReceive: function (id) {
-      var self = this;
+      let self = this;
 
       BillReceive.get({ id: id }).then(function (response) {
         self.bill_receive = response.data;
