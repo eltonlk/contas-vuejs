@@ -1,8 +1,8 @@
 const receiveNames = [
-  'Salário',
-  'Serviços',
-  '13º Salário',
-  'Férias'
+  'SALÁRIO',
+  'SERVIÇOS',
+  '13º SALAÁRIO',
+  'FÉRIAS'
 ];
 
 window.billReceiveCreateComponent = Vue.extend({
@@ -12,7 +12,7 @@ window.billReceiveCreateComponent = Vue.extend({
       <input type="text" v-model="bill_receive.date_due | dateLocalize"/>
       <br/><br/>
       <label>Nome:<label>
-      <select v-model="bill_receive.name">
+      <select v-model="bill_receive.name | upcase">
         <option v-for="name in names" :value="name">{{ name }}</option>
       </select>
       <br/><br/>

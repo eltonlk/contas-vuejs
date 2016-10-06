@@ -1,5 +1,5 @@
 Vue.filter('dateLocalize', {
-  read (value) {
+  read (value, locale) {
     if (value && typeof value !== undefined) {
       if (!(value instanceof Date)) {
         let dateRegex = value.match(/\d{4}\-\d{2}\-\d{2}/g);
@@ -11,12 +11,12 @@ Vue.filter('dateLocalize', {
         }
       }
 
-      return dateLocalize.format(value);
+      return dateLocalize(locale).format(value);
     }
 
     return value;
   },
-  write (value) {
+  write (value, locale) {
     let dateRegex = value.match(/\d{2}\/\d{2}\/\d{4}/g);
 
     if (dateRegex) {

@@ -3,7 +3,7 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 Vue.filter('numberToCurrency', {
-  read: function read(value) {
+  read: function read(value, locale) {
     var number = 0;
 
     if (value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== undefined) {
@@ -12,9 +12,9 @@ Vue.filter('numberToCurrency', {
       number = numberRegex ? numberRegex[0] : 0;
     }
 
-    return numberToCurrency.format(number);
+    return numberToCurrency(locale).format(number);
   },
-  write: function write(value) {
+  write: function write(value, locale) {
     var number = 0;
 
     if (value.length > 0) {

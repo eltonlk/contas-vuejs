@@ -19,7 +19,7 @@ window.billPayListComponent = Vue.extend({
         <tr v-for="(index, bill_pay) in bill_pays">
           <td>{{ index + 1 }}</td>
           <td>{{ bill_pay.date_due | dateLocalize }}</td>
-          <td>{{ bill_pay.name }}</td>
+          <td>{{ bill_pay.name | upcase }}</td>
           <td>{{ bill_pay.value | numberToCurrency }}</td>
           <td :class="{'done': bill_pay.done, 'pending': !bill_pay.done}">
             <label>

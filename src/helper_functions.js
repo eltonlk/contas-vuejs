@@ -1,8 +1,12 @@
-const dateLocalize = new Intl.DateTimeFormat('pt-BR');
+const dateLocalize = (locale = 'pt-BR') => {
+  return new Intl.DateTimeFormat(locale);
+}
 
-const numberToCurrency = new Intl.NumberFormat('pt-BR', {
-  minimumFractionDigitis: 2,
-  maximumFractionDigitis: 2,
-  style: 'currency',
-  currency: 'BRL'
-});
+const numberToCurrency = (locale = 'pt-BR') => {
+  return new Intl.NumberFormat(locale, {
+    minimumFractionDigitis: 2,
+    maximumFractionDigitis: 2,
+    style: 'currency',
+    currency: 'BRL'
+  });
+};

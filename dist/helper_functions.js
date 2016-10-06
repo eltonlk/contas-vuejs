@@ -1,10 +1,18 @@
 'use strict';
 
-var dateLocalize = new Intl.DateTimeFormat('pt-BR');
+var dateLocalize = function dateLocalize() {
+  var locale = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'pt-BR';
 
-var numberToCurrency = new Intl.NumberFormat('pt-BR', {
-  minimumFractionDigitis: 2,
-  maximumFractionDigitis: 2,
-  style: 'currency',
-  currency: 'BRL'
-});
+  return new Intl.DateTimeFormat(locale);
+};
+
+var numberToCurrency = function numberToCurrency() {
+  var locale = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'pt-BR';
+
+  return new Intl.NumberFormat(locale, {
+    minimumFractionDigitis: 2,
+    maximumFractionDigitis: 2,
+    style: 'currency',
+    currency: 'BRL'
+  });
+};

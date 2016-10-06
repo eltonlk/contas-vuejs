@@ -1,5 +1,5 @@
 Vue.filter('numberToCurrency', {
-  read (value) {
+  read (value, locale) {
     let number = 0;
 
     if (value && typeof value !== undefined) {
@@ -8,9 +8,9 @@ Vue.filter('numberToCurrency', {
       number = numberRegex ? numberRegex[0] : 0;
     }
 
-    return numberToCurrency.format(number);
+    return numberToCurrency(locale).format(number);
   },
-  write (value) {
+  write (value, locale) {
     let number = 0;
 
     if (value.length > 0) {

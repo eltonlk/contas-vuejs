@@ -1,11 +1,11 @@
 const payNames = [
-  'Conta de luz',
-  'Conta de água',
-  'Conta de telefone',
-  'Supermercado',
-  'Cartão de crédito',
-  'Empréstimo',
-  'Gasolina'
+  'CONTA DE LUZ',
+  'CONTA DE ÁGUA',
+  'CONTA DE TELEFONE',
+  'SUPERMERCADO',
+  'CARTÃO DE CRÉDITO',
+  'EMPRÉSTIMO',
+  'GASOLINA'
 ];
 
 window.billPayCreateComponent = Vue.extend({
@@ -15,7 +15,7 @@ window.billPayCreateComponent = Vue.extend({
       <input type="text" v-model="bill_pay.date_due | dateLocalize"/>
       <br/><br/>
       <label>Nome:<label>
-      <select v-model="bill_pay.name">
+      <select v-model="bill_pay.name | upcase">
         <option v-for="name in names" :value="name">{{ name }}</option>
       </select>
       <br/><br/>
