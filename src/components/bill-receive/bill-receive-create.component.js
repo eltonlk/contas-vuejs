@@ -1,3 +1,10 @@
+const names = [
+  'Salário',
+  'Serviços',
+  '13º Salário',
+  'Férias'
+];
+
 window.billReceiveCreateComponent = Vue.extend({
   template: `
     <form name="form" @submit.prevent="submit">
@@ -29,15 +36,7 @@ window.billReceiveCreateComponent = Vue.extend({
         value: 0,
         done: false
       },
-      names: [
-        'Conta de luz',
-        'Conta de água',
-        'Conta de telefone',
-        'Supermercado',
-        'Cartão de crédito',
-        'Empréstimo',
-        'Gasolina'
-      ]
+      names: names
     }
   },
   created: function () {

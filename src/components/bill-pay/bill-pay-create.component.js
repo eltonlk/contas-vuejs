@@ -1,3 +1,13 @@
+const names = [
+  'Conta de luz',
+  'Conta de água',
+  'Conta de telefone',
+  'Supermercado',
+  'Cartão de crédito',
+  'Empréstimo',
+  'Gasolina'
+];
+
 window.billPayCreateComponent = Vue.extend({
   template: `
     <form name="form" @submit.prevent="submit">
@@ -29,15 +39,7 @@ window.billPayCreateComponent = Vue.extend({
         value: 0,
         done: false
       },
-      names: [
-        'Conta de luz',
-        'Conta de água',
-        'Conta de telefone',
-        'Supermercado',
-        'Cartão de crédito',
-        'Empréstimo',
-        'Gasolina'
-      ]
+      names: names
     }
   },
   created: function () {
