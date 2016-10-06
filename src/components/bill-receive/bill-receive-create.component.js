@@ -30,12 +30,7 @@ window.billReceiveCreateComponent = Vue.extend({
   data () {
     return {
       action: 'create',
-      bill_receive: {
-        date_due: '',
-        name: '',
-        value: 0,
-        done: false
-      },
+      bill_receive: new Bill(),
       names: receiveNames
     }
   },
@@ -48,18 +43,18 @@ window.billReceiveCreateComponent = Vue.extend({
   methods: {
     submit () {
       if (this.action == 'create') {
-        BillReceive.save({}, this.bill_receive).then((response) => {
+        BillReceive.save({}, this.bill_receive.toJSON()).then((response) => {
           this.$router.go({ name: 'bill-receive.list' });
         });
       } else {
-        BillReceive.update({ id: this.bill_receive.id }, this.bill_receive).then((response) => {
+        BillReceive.update({ id: this.bill_receive.id }, this.bill_receive.toJSON()).then((response) => {
           this.$router.go({ name: 'bill-receive.list' });
         });
       }
     },
     getBillReceive (id) {
       BillReceive.get({ id: id }).then((response) => {
-        this.bill_receive = response.data;
+        this.bill_receive = new Bill(response.data);
       });
     }
   }

@@ -33,12 +33,7 @@ window.billPayCreateComponent = Vue.extend({
   data () {
     return {
       action: 'create',
-      bill_pay: {
-        date_due: '',
-        name: '',
-        value: 0,
-        done: false
-      },
+      bill_pay: new Bill(),
       names: payNames
     }
   },
@@ -51,18 +46,18 @@ window.billPayCreateComponent = Vue.extend({
   methods: {
     submit () {
       if (this.action == 'create') {
-        BillPay.save({}, this.bill_pay).then((response) => {
+        BillPay.save({}, this.bill_pay.toJSON()).then((response) => {
           this.$router.go({ name: 'bill-pay.list' });
         });
       } else {
-        BillPay.update({ id: this.bill_pay.id }, this.bill_pay).then((response) => {
+        BillPay.update({ id: this.bill_pay.id }, this.bill_pay.toJSON()).then((response) => {
           this.$router.go({ name: 'bill-pay.list' });
         });
       }
     },
     getBillPay (id) {
       BillPay.get({ id: id }).then((response) => {
-        this.bill_pay = response.data;
+        this.bill_pay = new Bill(response.data);
       });
     }
   }
