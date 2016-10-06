@@ -18,7 +18,7 @@ window.billReceiveListComponent = Vue.extend({
       <tbody>
         <tr v-for="(index, bill_receive) in bill_receives">
           <td>{{ index + 1 }}</td>
-          <td>{{ bill_receive.date_due }}</td>
+          <td>{{ bill_receive.date_due | dateLocalize }}</td>
           <td>{{ bill_receive.name }}</td>
           <td>{{ bill_receive.value | numberToCurrency }}</td>
           <td :class="{'done': bill_receive.done, 'pending': !bill_receive.done}">

@@ -12,7 +12,7 @@ window.billPayCreateComponent = Vue.extend({
   template: `
     <form name="form" @submit.prevent="submit">
       <label>Vencimento:<label>
-      <input type="text" v-model="bill_pay.date_due"/>
+      <input type="text" v-model="bill_pay.date_due | dateLocalize"/>
       <br/><br/>
       <label>Nome:<label>
       <select v-model="bill_pay.name">
