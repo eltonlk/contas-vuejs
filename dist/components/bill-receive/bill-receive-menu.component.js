@@ -1,10 +1,5 @@
-'use strict';
+"use strict";
 
 window.billReceiveMenuComponent = Vue.extend({
-  template: '\n    <nav>\n      <ul>\n        <li v-for="menu in menus">\n          <a v-link="{ name: menu.routeName }">{{ menu.text }}</a>\n        </li>\n      </ul>\n    </nav>\n  ',
-  data: function data() {
-    return {
-      menus: [{ text: 'Listar contas', routeName: 'bill-receive.list' }, { text: 'Criar conta', routeName: 'bill-receive.create' }]
-    };
-  }
+  template: "\n    <a class=\"waves-effect waves-light btn\" v-link=\"{ name: 'bill-receive.create' }\">\n      <i class=\"material-icons left\">add</i>Adicionar\n    </a>\n\n    <a class=\"waves-effect waves-light btn grey\" v-link=\"{ name: 'bill-receive.list' }\">\n      <i class=\"material-icons left\">view_list</i>Listar\n    </a>\n  "
 });

@@ -7,25 +7,35 @@ const receiveNames = [
 
 window.billReceiveCreateComponent = Vue.extend({
   template: `
-    <form name="form" @submit.prevent="submit">
-      <label>Vencimento:<label>
-      <input type="text" v-model="bill_receive.date_due | dateLocalize"/>
-      <br/><br/>
-      <label>Nome:<label>
-      <select v-model="bill_receive.name | upcase">
-        <option v-for="name in names" :value="name">{{ name }}</option>
-      </select>
-      <br/><br/>
-      <label>Valor:<label>
-      <input type="text" v-model="bill_receive.value | numberToCurrency"/>
-      <br/><br/>
-      <label>Situação:<label>
-      <span :class="{'done': bill_receive.done, 'pending': !bill_receive.done}">
-        {{ bill_receive.done | billReceiveDoneLabel }}
-      </span>
-      <br/><br/>
-      <input type="submit" value="{{ action == 'create' ? 'Adicionar' : 'Alterar' }}"/>
-    </form>
+    <div class="container">
+      <form @submit.prevent="submit">
+        <div class="input-field">
+          <input id="date_due" type="text" v-model="bill_receive.date_due | dateLocalize">
+          <label for="date_due">Vencimento</label>
+        </div>
+
+        <div class="input-field">
+          <select v-model="bill_receive.name | upcase">
+            <option v-for="name in names" :value="name">{{ name }}</option>
+          </select>
+          <label for="name">Nome</label>
+        </div>
+
+        <div class="input-field">
+          <input id="value" type="text" v-model="bill_receive.value | numberToCurrency">
+          <label for="value">Valor</label>
+        </div>
+
+        <p>
+          <input type="checkbox" class="filled-in" id="done" v-model="bill_receive.done"/>
+          <label for="done">Pago</label>
+        </p>
+
+        <button class="btn waves-effect waves-light" type="submit">
+          {{ action == 'create' ? 'Adicionar' : 'Alterar' }}
+        </button>
+      </form>
+    </div>
   `,
   data () {
     return {
@@ -35,6 +45,10 @@ window.billReceiveCreateComponent = Vue.extend({
     }
   },
   created () {
+    $(document).ready(function() {
+      $('select').material_select();
+    });
+
     if (this.$route.name == 'bill-receive.update') {
       this.action = 'update';
       this.getBillReceive(this.$route.params.id);

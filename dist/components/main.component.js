@@ -1,12 +1,16 @@
 'use strict';
 
 window.mainComponent = Vue.extend({
+  created: function created() {
+    $(document).ready(function () {
+      $('.button-collapse').sideNav({ closeOnClick: true });
+    });
+  },
   data: function data() {
     return {
-      bill_receives: [{ date_due: '19/08/2016', name: 'Conta de luz', value: 175.98, done: false }, { date_due: '20/08/2016', name: 'Festas', value: 250.40, done: true }, { date_due: '22/08/2016', name: 'Supermercado', value: 550.00, done: false }, { date_due: '24/08/2016', name: 'Conta de telefone', value: 75.45, done: false }, { date_due: '24/08/2016', name: 'Cartão de crédito', value: 800.36, done: false }, { date_due: '24/08/2016', name: 'Empréstimo', value: 277.12, done: true }, { date_due: '26/08/2016', name: 'Gasolina', value: 189.32, done: true }],
       menus: [{ text: 'Dashboard', routeName: 'dashboard' }, { text: 'Contas a pagar', routeName: 'bill-pay' }, { text: 'Contas a receber', routeName: 'bill-receive' }]
     };
   },
 
-  template: '\n    <nav>\n      <ul>\n        <li v-for="menu in menus">\n          <a v-link="{ name: menu.routeName }">{{ menu.text }}</a>\n        </li>\n      </ul>\n    </nav>\n\n    <router-view></router-view>\n  '
+  template: '\n    <div class="navbar-fixed">\n      <nav>\n        <div class="nav-wrapper container">\n          <a href="#" data-activates="nav-mobile" class="button-collapse">\n            <i class="material-icons">menu</i>\n          </a>\n\n          <a href="#" class="brand-logo">Contas</a>\n\n          <ul class="right hide-on-med-and-down">\n            <li v-for="menu in menus">\n              <a v-link="{ name: menu.routeName }">{{ menu.text }}</a>\n            </li>\n          </ul>\n\n          <ul id="nav-mobile" class="side-nav">\n            <li v-for="menu in menus">\n              <a v-link="{ name: menu.routeName }">{{ menu.text }}</a>\n            </li>\n          </ul>\n        </div>\n      </nav>\n    </div>\n\n    <router-view></router-view>\n  '
 });

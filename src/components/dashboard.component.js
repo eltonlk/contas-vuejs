@@ -1,31 +1,34 @@
 window.dashboardComponent = Vue.extend({
   template: `
-    <h1>{{ title }}</h1>
+    <div class="container">
+      <div class="section">
+        <h1>{{ title }}</h1>
+      <div>
 
-    <table border="1" cellpadding="10">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Valor</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Entrada</td>
-          <td>{{ totalReceives | numberToCurrency }}</td>
-        </tr>
-        <tr>
-          <td>Saída</td>
-          <td>{{ totalPays | numberToCurrency }}</td>
-        </tr>
-      </thead>
-      <tfoot>
-        <tr>
-          <td>Saldo</td>
-          <td>{{ totalReceives - totalPays | numberToCurrency }}</td>
-        </tr>
-      </tfoot>
-    </table>
+      <div class="row">
+        <div class="col s12 m4">
+          <ul class="collection with-header">
+            <li class="collection-header blue-grey darken-3 white-text">
+              <h6>Contas</h6>
+            </li>
+            <li class="collection-item">
+              Receber
+              <span class="badge green-text">{{ totalReceives | numberToCurrency }}</span>
+            </li>
+            <li class="collection-item">
+              Pagar
+              <span class="badge red-text">{{ totalPays | numberToCurrency }}</span>
+            </li>
+            <li class="collection-item">
+              <strong>
+                Total
+                <span class="badge">{{ totalReceives - totalPays | numberToCurrency }}</span>
+              </strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   `,
   data () {
     return {

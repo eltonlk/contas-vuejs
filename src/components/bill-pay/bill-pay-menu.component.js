@@ -1,19 +1,11 @@
 window.billPayMenuComponent = Vue.extend({
   template: `
-    <nav>
-      <ul>
-        <li v-for="menu in menus">
-          <a v-link="{ name: menu.routeName }">{{ menu.text }}</a>
-        </li>
-      </ul>
-    </nav>
-  `,
-  data () {
-    return {
-      menus: [
-        { text: 'Listar contas', routeName: 'bill-pay.list'   },
-        { text: 'Criar conta'  , routeName: 'bill-pay.create' }
-      ]
-    };
-  }
+    <a class="waves-effect waves-light btn" v-link="{ name: 'bill-pay.create' }">
+      <i class="material-icons left">add</i>Adicionar
+    </a>
+
+    <a class="waves-effect waves-light btn grey" v-link="{ name: 'bill-pay.list' }">
+      <i class="material-icons left">view_list</i>Listar
+    </a>
+  `
 });

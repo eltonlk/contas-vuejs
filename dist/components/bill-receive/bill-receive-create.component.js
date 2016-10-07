@@ -3,7 +3,7 @@
 var receiveNames = ['SALÁRIO', 'SERVIÇOS', '13º SALAÁRIO', 'FÉRIAS'];
 
 window.billReceiveCreateComponent = Vue.extend({
-  template: '\n    <form name="form" @submit.prevent="submit">\n      <label>Vencimento:<label>\n      <input type="text" v-model="bill_receive.date_due | dateLocalize"/>\n      <br/><br/>\n      <label>Nome:<label>\n      <select v-model="bill_receive.name | upcase">\n        <option v-for="name in names" :value="name">{{ name }}</option>\n      </select>\n      <br/><br/>\n      <label>Valor:<label>\n      <input type="text" v-model="bill_receive.value | numberToCurrency"/>\n      <br/><br/>\n      <label>Situação:<label>\n      <span :class="{\'done\': bill_receive.done, \'pending\': !bill_receive.done}">\n        {{ bill_receive.done | billReceiveDoneLabel }}\n      </span>\n      <br/><br/>\n      <input type="submit" value="{{ action == \'create\' ? \'Adicionar\' : \'Alterar\' }}"/>\n    </form>\n  ',
+  template: '\n    <div class="container">\n      <form @submit.prevent="submit">\n        <div class="input-field">\n          <input id="date_due" type="text" v-model="bill_receive.date_due | dateLocalize">\n          <label for="date_due">Vencimento</label>\n        </div>\n\n        <div class="input-field">\n          <select v-model="bill_receive.name | upcase">\n            <option v-for="name in names" :value="name">{{ name }}</option>\n          </select>\n          <label for="name">Nome</label>\n        </div>\n\n        <div class="input-field">\n          <input id="value" type="text" v-model="bill_receive.value | numberToCurrency">\n          <label for="value">Valor</label>\n        </div>\n\n        <p>\n          <input type="checkbox" class="filled-in" id="done" v-model="bill_receive.done"/>\n          <label for="done">Pago</label>\n        </p>\n\n        <button class="btn waves-effect waves-light" type="submit">\n          {{ action == \'create\' ? \'Adicionar\' : \'Alterar\' }}\n        </button>\n      </form>\n    </div>\n  ',
   data: function data() {
     return {
       action: 'create',
@@ -12,6 +12,10 @@ window.billReceiveCreateComponent = Vue.extend({
     };
   },
   created: function created() {
+    $(document).ready(function () {
+      $('select').material_select();
+    });
+
     if (this.$route.name == 'bill-receive.update') {
       this.action = 'update';
       this.getBillReceive(this.$route.params.id);

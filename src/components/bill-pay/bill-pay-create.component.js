@@ -10,25 +10,35 @@ const payNames = [
 
 window.billPayCreateComponent = Vue.extend({
   template: `
-    <form name="form" @submit.prevent="submit">
-      <label>Vencimento:<label>
-      <input type="text" v-model="bill_pay.date_due | dateLocalize"/>
-      <br/><br/>
-      <label>Nome:<label>
-      <select v-model="bill_pay.name | upcase">
-        <option v-for="name in names" :value="name">{{ name }}</option>
-      </select>
-      <br/><br/>
-      <label>Valor:<label>
-      <input type="text" v-model="bill_pay.value | numberToCurrency"/>
-      <br/><br/>
-      <label>Situação:<label>
-      <span :class="{'done': bill_pay.done, 'pending': !bill_pay.done}">
-        {{ bill_pay.done | billPayDoneLabel }}
-      </span>
-      <br/><br/>
-      <input type="submit" value="{{ action == 'create' ? 'Adicionar' : 'Alterar' }}"/>
-    </form>
+    <div class="container">
+      <form @submit.prevent="submit">
+        <div class="input-field">
+          <input id="date_due" type="text" v-model="bill_pay.date_due | dateLocalize">
+          <label for="date_due">Vencimento</label>
+        </div>
+
+        <div class="input-field">
+          <select v-model="bill_pay.name | upcase">
+            <option v-for="name in names" :value="name">{{ name }}</option>
+          </select>
+          <label for="name">Nome</label>
+        </div>
+
+        <div class="input-field">
+          <input id="value" type="text" v-model="bill_pay.value | numberToCurrency">
+          <label for="value">Valor</label>
+        </div>
+
+        <p>
+          <input type="checkbox" class="filled-in" id="done" v-model="bill_pay.done"/>
+          <label for="done">Pago</label>
+        </p>
+
+        <button class="btn waves-effect waves-light" type="submit">
+          {{ action == 'create' ? 'Adicionar' : 'Alterar' }}
+        </button>
+      </form>
+    </div>
   `,
   data () {
     return {
@@ -38,6 +48,10 @@ window.billPayCreateComponent = Vue.extend({
     }
   },
   created () {
+    $(document).ready(function() {
+      $('select').material_select();
+    });
+
     if (this.$route.name == 'bill-pay.update') {
       this.action = 'update';
       this.getBillPay(this.$route.params.id);

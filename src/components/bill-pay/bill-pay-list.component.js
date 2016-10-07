@@ -1,39 +1,39 @@
 window.billPayListComponent = Vue.extend({
   template: `
-    <p :class="{ 'empty': status.count === 0, 'pending': status.pending > 0, 'done': status.count > 0 && status.pending === 0 }">
-      {{ status | billPaysStatusLabel }}
-    </p>
+    <div class="container">
+      <p :class="{ 'grey-text': status.count === 0, 'red-text': status.pending > 0, 'green-text': status.count > 0 && status.pending === 0 }">
+        {{ status | billPaysStatusLabel }}
+      </p>
 
-    <table border="1" cellpadding="10">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Vencimento</th>
-          <th>Nome</th>
-          <th>Valor</th>
-          <th>Situação</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(index, bill_pay) in bill_pays">
-          <td>{{ index + 1 }}</td>
-          <td>{{ bill_pay.date_due | dateLocalize }}</td>
-          <td>{{ bill_pay.name | upcase }}</td>
-          <td>{{ bill_pay.value | numberToCurrency }}</td>
-          <td :class="{'done': bill_pay.done, 'pending': !bill_pay.done}">
-            <label>
-              <input type="checkbox" v-model="bill_pay.done" @change="changeDoneBillPay(bill_pay)"/>
-              {{ bill_pay.done | billPayDoneLabel }}
-            <label>
-          </td>
-          <td>
-            <a v-link="{ name: 'bill-pay.update', params: { id: bill_pay.id } }">Editar</a> |
-            <a href="#" @click.prevent="destroyBillPay(bill_pay)" class="destroy">Excluir</a>
-          </td>
-        </tr>
-      </thead>
-    </table>
+      <table class="bordered striped responsive-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Vencimento</th>
+            <th>Nome</th>
+            <th>Valor</th>
+            <th>Situação</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(index, bill_pay) in bill_pays">
+            <td>{{ index + 1 }}</td>
+            <td>{{ bill_pay.date_due | dateLocalize }}</td>
+            <td>{{ bill_pay.name | upcase }}</td>
+            <td>{{ bill_pay.value | numberToCurrency }}</td>
+            <td>
+              <input id="done_{{ bill_pay.id }}" type="checkbox" v-model="bill_pay.done" @change="changeDoneBillPay(bill_pay)"/>
+              <label for="done_{{ bill_pay.id }}">{{ bill_pay.done | billPayDoneLabel }}<label>
+            </td>
+            <td>
+              <a v-link="{ name: 'bill-pay.update', params: { id: bill_pay.id } }">Editar</a> |
+              <a href="#" @click.prevent="destroyBillPay(bill_pay)" class="destroy">Excluir</a>
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </div>
   `,
   data () {
     return {
