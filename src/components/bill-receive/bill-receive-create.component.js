@@ -63,10 +63,14 @@ window.billReceiveCreateComponent = Vue.extend({
       if (this.action == 'create') {
         BillReceive.save({}, this.bill_receive.toJSON()).then((response) => {
           this.$router.go({ name: 'bill-receive.list' });
+
+          Materialize.toast('Conta criada com sucesso!', 4000);
         });
       } else {
         BillReceive.update({ id: this.bill_receive.id }, this.bill_receive.toJSON()).then((response) => {
           this.$router.go({ name: 'bill-receive.list' });
+
+          Materialize.toast('Conta atualizada com sucesso!', 4000);
         });
       }
     },
