@@ -15,7 +15,7 @@ window.mainComponent = Vue.extend({
   },
   template: `
     <div class="navbar-fixed">
-      <nav>
+      <nav class="blue-grey darken-2">
         <div class="nav-wrapper container">
           <a href="#" data-activates="nav-mobile" class="button-collapse">
             <i class="material-icons">menu</i>

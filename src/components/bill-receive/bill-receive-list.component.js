@@ -5,7 +5,7 @@ window.billReceiveListComponent = Vue.extend({
         {{ status | billReceivesStatusLabel }}
       </p>
 
-      <table class="bordered striped responsive-table">
+      <table class="bordered striped responsive-table z-depth-1">
         <thead>
           <tr>
             <th>#</th>

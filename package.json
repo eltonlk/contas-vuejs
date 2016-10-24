@@ -19,5 +19,8 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:eltonlk/contas-vuejs.git"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0"
   }
 }
