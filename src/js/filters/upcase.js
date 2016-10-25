@@ -1,16 +1,18 @@
-Vue.filter('upcase', {
-  read (value) {
-    if (value) {
-      return value.toUpperCase();
-    }
+/* global Vue */
 
-    return value;
-  },
-  write (value) {
-    if (value) {
-      return value.toLowerCase();
-    }
+Vue.filter("upcase", {
+    read (value) {
+        if (value) {
+            return value.toUpperCase();
+        }
 
-    return value;
-  }
+        return value;
+    },
+    write (value) {
+        if (value) {
+            return value.toLowerCase();
+        }
+
+        return value;
+    }
 });

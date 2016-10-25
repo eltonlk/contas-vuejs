@@ -2,7 +2,7 @@
 
 /* global Vue */
 
-window.modalComponent = Vue.extend({
+window.confirmBillDestroyComponent = Vue.extend({
     data: function data() {
         return {
             modal: {
