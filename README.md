@@ -8,7 +8,8 @@ Install npm dependencies
 
 Install lite-server
 
-    npm install -g lite-server
+    sudo npm install -g lite-server
+    sudo npm install -g concurrently
 
 Install composer dependencies
 
@@ -26,3 +27,8 @@ Install composer dependencies
 ## Run Babel compile
 
     npm run babel
+
+## Run FrontEnd + Babel compile
+
+    npm start
+

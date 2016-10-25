@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "babel": "babel src --out-dir dist --watch"
+    "babel": "babel src --out-dir dist --watch",
+    "start": "concurrently \"npm run babel\" \"lite-server\""
   },
   "author": "Elton Luis Kolling",
   "license": "ISC",
