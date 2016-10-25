@@ -8,7 +8,7 @@
     "babel": "babel src --out-dir dist --watch",
     "sass": "node-sass ./src/sass -o ./dist/css",
     "sass:w": "node-sass ./src/sass -o ./dist/css -w",
-    "start": "concurrently \"npm run babel\" \"npm run sass\" \"npm run sass:w\" \"lite-server\""
+    "start": "concurrently \"npm run babel\" \"npm run sass\" \"npm run sass:w\" \"gulp\" \"lite-server\""
   },
   "author": "Elton Luis Kolling",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "url": "git@github.com:eltonlk/contas-vuejs.git"
   },
   "devDependencies": {
-    "babel-cli": "^6.16.0"
+    "babel-cli": "^6.16.0",
+    "gulp": "^3.9.1"
   }
 }
