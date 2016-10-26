@@ -1,4 +1,4 @@
-/* global Bill, BillReceive, Materialize */
+/* global BillReceive, Materialize */
 
 const receiveNames = [
     "SALÁRIO",
@@ -6,6 +6,8 @@ const receiveNames = [
     "13º SALAÁRIO",
     "FÉRIAS"
 ];
+
+let Bill = require("../../bill");
 
 module.exports = {
     template: `

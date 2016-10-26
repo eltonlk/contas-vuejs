@@ -1,4 +1,13 @@
-/* global Vue, numberToCurrency */
+/* global Vue */
+
+const numberToCurrency = (locale = "pt-BR") => {
+    return new Intl.NumberFormat(locale, {
+        minimumFractionDigitis: 2,
+        maximumFractionDigitis: 2,
+        style: "currency",
+        currency: "BRL"
+    });
+};
 
 Vue.filter("numberToCurrency", {
     read (value, locale) {

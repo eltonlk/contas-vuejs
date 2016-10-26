@@ -1,4 +1,8 @@
-/* global Vue, dateLocalize */
+/* global Vue */
+
+const dateLocalize = (locale = "pt-BR") => {
+    return new Intl.DateTimeFormat(locale);
+};
 
 Vue.filter("dateLocalize", {
     read (value, locale) {

@@ -6,7 +6,6 @@ Install npm dependencies
 
     sudo npm install -g lite-server
     sudo npm install -g concurrently
-    sudo npm install -g node-sass
     sudo npm install -g gulp-cli
 
     npm install
@@ -40,3 +39,6 @@ Run SASS compile watch
 
 Run gulp copy roboto fonts
     gulp
+
+Run webpack watch
+    webpack --watch

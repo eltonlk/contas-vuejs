@@ -1,4 +1,4 @@
-/* global BillPay, Bill, Materialize */
+/* global BillPay, Materialize */
 
 const payNames = [
     "CONTA DE LUZ",
@@ -9,6 +9,8 @@ const payNames = [
     "EMPRÉSTIMO",
     "GASOLINA"
 ];
+
+let Bill = require("../../bill");
 
 module.exports = {
     template: `

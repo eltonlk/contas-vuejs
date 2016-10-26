@@ -1,15 +1,11 @@
-webpackJsonp([1],[
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */
+webpackJsonp([1],{
+
+/***/ 28:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var billPayMenuComponent = __webpack_require__(6);
+	var billPayMenuComponent = __webpack_require__(29);
 
 	module.exports = {
 	    components: {
@@ -24,7 +20,8 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 6 */
+
+/***/ 29:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -34,14 +31,17 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 7 */
-/***/ function(module, exports) {
+
+/***/ 30:
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	/* global BillPay, Bill, Materialize */
+	/* global BillPay, Materialize */
 
 	var payNames = ["CONTA DE LUZ", "CONTA DE ÁGUA", "CONTA DE TELEFONE", "SUPERMERCADO", "CARTÃO DE CRÉDITO", "EMPRÉSTIMO", "GASOLINA"];
+
+	var Bill = __webpack_require__(37);
 
 	module.exports = {
 	    template: "\n        <div class=\"container\">\n            <form @submit.prevent=\"submit\">\n                <div class=\"row\">\n                    <div class=\"input-field col s6\">\n                        <input id=\"date_due\" type=\"text\" v-model=\"bill_pay.date_due | dateLocalize\">\n                        <label for=\"date_due\" class=\"active\">Vencimento</label>\n                    </div>\n\n                    <div class=\"input-field col s6\">\n                        <input id=\"value\" type=\"text\" v-model=\"bill_pay.value | numberToCurrency\">\n                        <label for=\"value\" class=\"active\">Valor</label>\n                    </div>\n                </div>\n\n                <div class=\"row\">\n                    <div class=\"input-field col s6\">\n                        <select class=\"browser-default\" v-model=\"bill_pay.name | upcase\">\n                            <option v-for=\"name in names\" :value=\"name\">{{ name }}</option>\n                        </select>\n                        <label for=\"name\" class=\"active\">Nome</label>\n                    </div>\n\n                    <div class=\"input-field col s6\">\n                        <input type=\"checkbox\" class=\"filled-in\" id=\"done\" v-model=\"bill_pay.done\"/>\n                        <label for=\"done\">Pago</label>\n                    </div>\n                </div>\n\n                <button class=\"btn waves-effect waves-light\" type=\"submit\">\n                    {{ action == 'create' ? 'Adicionar' : 'Alterar' }}\n                </button>\n            </form>\n        </div>\n    ",
@@ -88,14 +88,15 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 8 */
+
+/***/ 31:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	/* global BillPay, Materialize */
 
-	var confirmBillDestroyComponent = __webpack_require__(9);
+	var confirmBillDestroyComponent = __webpack_require__(32);
 
 	module.exports = {
 	    components: {
@@ -158,12 +159,13 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 9 */
+
+/***/ 32:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var modalComponent = __webpack_require__(10);
+	var modalComponent = __webpack_require__(33);
 
 	module.exports = {
 	    components: {
@@ -187,7 +189,8 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 10 */
+
+/***/ 33:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -206,12 +209,13 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 11 */
+
+/***/ 34:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var billReceiveMenuComponent = __webpack_require__(12);
+	var billReceiveMenuComponent = __webpack_require__(35);
 
 	module.exports = {
 	    components: {
@@ -226,7 +230,8 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 12 */
+
+/***/ 35:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -236,14 +241,17 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 13 */
-/***/ function(module, exports) {
+
+/***/ 36:
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	/* global Bill, BillReceive, Materialize */
+	/* global BillReceive, Materialize */
 
 	var receiveNames = ["SALÁRIO", "SERVIÇOS", "13º SALAÁRIO", "FÉRIAS"];
+
+	var Bill = __webpack_require__(37);
 
 	module.exports = {
 	    template: "\n        <div class=\"container\">\n            <form @submit.prevent=\"submit\">\n                <div class=\"row\">\n                    <div class=\"input-field col s6\">\n                        <input id=\"date_due\" type=\"text\" v-model=\"bill_receive.date_due | dateLocalize\">\n                        <label for=\"date_due\" class=\"active\">Vencimento</label>\n                    </div>\n\n                    <div class=\"input-field col s6\">\n                        <input id=\"value\" type=\"text\" v-model=\"bill_receive.value | numberToCurrency\">\n                        <label for=\"value\" class=\"active\">Valor</label>\n                    </div>\n                </div>\n\n                <div class=\"row\">\n                    <div class=\"input-field col s6\">\n                        <select class=\"browser-default\" v-model=\"bill_receive.name | upcase\">\n                            <option v-for=\"name in names\" :value=\"name\">{{ name }}</option>\n                        </select>\n                        <label for=\"name\" class=\"active\">Nome</label>\n                    </div>\n\n                    <div class=\"input-field col s6\">\n                        <input type=\"checkbox\" class=\"filled-in\" id=\"done\" v-model=\"bill_receive.done\"/>\n                        <label for=\"done\">Pago</label>\n                    </div>\n                </div>\n\n                <button class=\"btn waves-effect waves-light\" type=\"submit\">\n                    {{ action == 'create' ? 'Adicionar' : 'Alterar' }}\n                </button>\n            </form>\n        </div>\n    ",
@@ -290,14 +298,57 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 14 */
+
+/***/ 37:
+/***/ function(module, exports) {
+
+	"use strict";
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Bill = function () {
+	    function Bill() {
+	        var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	        _classCallCheck(this, Bill);
+
+	        this.date_due = "";
+	        this.name = "";
+	        this.value = 0;
+	        this.done = false;
+
+	        Object.assign(this, data);
+	    }
+
+	    _createClass(Bill, [{
+	        key: "toJSON",
+	        value: function toJSON() {
+	            return {
+	                date_due: this.date_due,
+	                name: this.name,
+	                value: this.value,
+	                done: this.done
+	            };
+	        }
+	    }]);
+
+	    return Bill;
+	}();
+
+	module.exports = Bill;
+
+/***/ },
+
+/***/ 38:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	/* global BillReceive, Materialize */
 
-	var confirmBillDestroyComponent = __webpack_require__(9);
+	var confirmBillDestroyComponent = __webpack_require__(32);
 
 	module.exports = {
 	    components: {
@@ -360,7 +411,8 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 15 */
+
+/***/ 39:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -390,7 +442,8 @@ webpackJsonp([1],[
 	};
 
 /***/ },
-/* 16 */
+
+/***/ 40:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -411,4 +464,5 @@ webpackJsonp([1],[
 	};
 
 /***/ }
-]);
+
+});
