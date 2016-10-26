@@ -1,13 +1,4 @@
-/* global VueRouter */
-
-require("../sass/app.scss");
-
-require("./helper_functions");
-require("./filters");
-require("./filters/date_localize");
-require("./filters/number_to_currency");
-require("./filters/upcase");
-require("./resources");
+require("./bootstrap");
 
 require([
     "./components/bill-pay/bill-pay.component",
@@ -28,6 +19,7 @@ require([
     dashboardComponent,
     mainComponent
 ) {
+    let VueRouter = require("vue-router");
     let router = new VueRouter();
 
     router.map({

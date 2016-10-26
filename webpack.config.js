@@ -1,4 +1,7 @@
+var webpack = require("webpack");
+
 module.exports = {
+    devtool: "source-map",
     entry: "./src/js/main.js",
     output: {
         path: __dirname + "/dist/js",
@@ -24,5 +27,20 @@ module.exports = {
                 loaders: [ "style", "css", "sass" ]
             }
         ]
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            "window.$": "jquery",
+            "window.jQuery": "jquery"
+        }),
+        new webpack.HotModuleReplacementPlugin()
+    ],
+    devServer: {
+        host: "127.0.0.1",
+        inline: true,
+        watchOptions: {
+            poll: true,
+            aggregateTimeout: 300
+        }
     }
 };

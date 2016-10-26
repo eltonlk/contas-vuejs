@@ -1,14 +1,14 @@
 module.exports = {
-    data () {
-        return {
-            modal: {
-                id: ""
+    props: {
+        modal: {
+            type: Object,
+            default () {
+                return {
+                    id: ""
+                };
             }
-        };
+        }
     },
-    props: [
-        "modal"
-    ],
     template: `
         <div :id="modal.id" class="modal">
             <div class="modal-content">

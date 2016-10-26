@@ -7,6 +7,7 @@ Install npm dependencies
     sudo npm install -g lite-server
     sudo npm install -g concurrently
     sudo npm install -g gulp-cli
+    sudo npm install -g webpack-dev-server
 
     npm install
 

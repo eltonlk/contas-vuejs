@@ -8,7 +8,7 @@
     "babel": "babel src --out-dir dist --watch",
     "sass": "node-sass ./src/sass -o ./dist/css",
     "sass:w": "node-sass ./src/sass -o ./dist/css -w",
-    "start": "concurrently \"webpack --watch\" \"lite-server\""
+    "start": "webpack-dev-server --progress"
   },
   "author": "Elton Luis Kolling",
   "license": "ISC",
