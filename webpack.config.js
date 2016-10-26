@@ -1,12 +1,14 @@
 var webpack = require("webpack");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var extrectCSS = new ExtractTextPlugin("css/app.css");
 
 module.exports = {
     devtool: "source-map",
     entry: "./src/js/main.js",
     output: {
-        path: __dirname + "/dist/js",
+        path: __dirname + "/dist/",
         filename: "app.bundle.js",
-        publicPath: "/dist/js/"
+        publicPath: "/dist/"
     },
     module: {
         loaders: [
@@ -24,7 +26,7 @@ module.exports = {
             },
             {
                 test: /\.(scss|sass)$/,
-                loaders: [ "style", "css", "sass" ]
+                loader: extrectCSS.extract(["css", "sass"])
             }
         ]
     },
@@ -33,6 +35,7 @@ module.exports = {
             "window.$": "jquery",
             "window.jQuery": "jquery"
         }),
+        extrectCSS,
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {
