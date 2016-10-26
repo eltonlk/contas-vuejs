@@ -1,6 +1,4 @@
-/* global Vue */
-
-window.mainComponent = Vue.extend({
+module.exports = {
     created () {
         $(document).ready(() => {
             $(".button-collapse").sideNav({ closeOnClick: true });
@@ -41,4 +39,4 @@ window.mainComponent = Vue.extend({
         </div>
         <router-view></router-view>
     `
-});
+};

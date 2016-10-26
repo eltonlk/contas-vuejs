@@ -1,6 +1,4 @@
-/* global Vue */
-
-window.billReceiveMenuComponent = Vue.extend({
+module.exports = {
     template: `
         <a class="waves-effect waves-light btn" v-link="{ name: 'bill-receive.create' }">
             <i class="material-icons left">add</i>Adicionar
@@ -10,4 +8,4 @@ window.billReceiveMenuComponent = Vue.extend({
             <i class="material-icons left">view_list</i>Listar
         </a>
     `
-});
+};

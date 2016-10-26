@@ -1,6 +1,6 @@
-/* global Vue, billPayMenuComponent */
+let billPayMenuComponent = require("./bill-pay-menu.component");
 
-window.billPayComponent = Vue.extend({
+module.exports = {
     components: {
         "bill-pay-menu-component": billPayMenuComponent
     },
@@ -20,4 +20,4 @@ window.billPayComponent = Vue.extend({
             title: "Contas a Pagar"
         };
     }
-});
+};

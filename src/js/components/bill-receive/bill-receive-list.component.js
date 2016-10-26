@@ -1,6 +1,8 @@
-/* global Vue, confirmBillDestroyComponent, BillReceive, Materialize */
+/* global BillReceive, Materialize */
 
-window.billReceiveListComponent = Vue.extend({
+let confirmBillDestroyComponent = require("../confirm-bill-destroy.component");
+
+module.exports = {
     components: {
         "confirm-bill-destroy": confirmBillDestroyComponent
     },
@@ -89,4 +91,4 @@ window.billReceiveListComponent = Vue.extend({
             });
         }
     }
-});
+};

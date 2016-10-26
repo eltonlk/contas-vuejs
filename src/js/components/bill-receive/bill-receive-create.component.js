@@ -1,4 +1,4 @@
-/* global Vue, Bill, BillReceive, Materialize */
+/* global Bill, BillReceive, Materialize */
 
 const receiveNames = [
     "SALÁRIO",
@@ -7,7 +7,7 @@ const receiveNames = [
     "FÉRIAS"
 ];
 
-window.billReceiveCreateComponent = Vue.extend({
+module.exports = {
     template: `
         <div class="container">
             <form @submit.prevent="submit">
@@ -78,4 +78,4 @@ window.billReceiveCreateComponent = Vue.extend({
             });
         }
     }
-});
+};

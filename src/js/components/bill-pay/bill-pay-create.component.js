@@ -1,4 +1,4 @@
-/* global Vue, BillPay, Bill, Materialize */
+/* global BillPay, Bill, Materialize */
 
 const payNames = [
     "CONTA DE LUZ",
@@ -10,7 +10,7 @@ const payNames = [
     "GASOLINA"
 ];
 
-window.billPayCreateComponent = Vue.extend({
+module.exports = {
     template: `
         <div class="container">
             <form @submit.prevent="submit">
@@ -81,4 +81,4 @@ window.billPayCreateComponent = Vue.extend({
             });
         }
     }
-});
+};

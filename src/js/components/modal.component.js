@@ -1,6 +1,4 @@
-/* global Vue */
-
-window.modalComponent = Vue.extend({
+module.exports = {
     data () {
         return {
             modal: {
@@ -21,4 +19,4 @@ window.modalComponent = Vue.extend({
             </div>
         </div>
     `
-});
+};

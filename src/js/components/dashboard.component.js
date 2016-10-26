@@ -1,6 +1,6 @@
-/* global Vue, BillPay, BillReceive */
+/* global BillPay, BillReceive */
 
-window.dashboardComponent = Vue.extend({
+module.exports = {
     template: `
         <div class="container">
             <div class="section">
@@ -48,4 +48,4 @@ window.dashboardComponent = Vue.extend({
             this.totalReceives = response.data.total;
         });
     }
-});
+};

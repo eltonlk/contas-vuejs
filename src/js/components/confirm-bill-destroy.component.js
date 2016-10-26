@@ -1,6 +1,6 @@
-/* global Vue, modalComponent */
+let modalComponent = require("./modal.component");
 
-window.confirmBillDestroyComponent = Vue.extend({
+module.exports = {
     components: {
         "modal": modalComponent
     },
@@ -34,4 +34,4 @@ window.confirmBillDestroyComponent = Vue.extend({
             </div>
         </modal>
     `
-});
+};

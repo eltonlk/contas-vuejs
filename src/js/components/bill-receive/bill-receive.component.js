@@ -1,6 +1,6 @@
-/* global Vue, billReceiveMenuComponent */
+let billReceiveMenuComponent = require("./bill-receive-menu.component");
 
-window.billReceiveComponent = Vue.extend({
+module.exports = {
     components: {
         "bill-receive-menu-component": billReceiveMenuComponent
     },
@@ -20,4 +20,4 @@ window.billReceiveComponent = Vue.extend({
             title: "Contas a Receber"
         };
     }
-});
+};
