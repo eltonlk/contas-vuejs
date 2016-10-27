@@ -1,10 +1,11 @@
-/* global BillPay, Materialize */
+/* global Materialize */
 
-let confirmBillDestroyComponent = require("../confirm-bill-destroy.component");
+import {BillPayResource} from "../../resources";
+import ConfirmBillDestroyComponent from "../confirm-bill-destroy.component";
 
-module.exports = {
+export default {
     components: {
-        "confirm-bill-destroy": confirmBillDestroyComponent
+        "confirm-bill-destroy": ConfirmBillDestroyComponent
     },
     template: `
         <div class="container">
@@ -50,14 +51,14 @@ module.exports = {
         };
     },
     created () {
-        BillPay.query().then((response) => {
+        BillPayResource.query().then((response) => {
             this.bill_pays = response.data;
         });
     },
     methods: {
         changeDoneBillPay (bill_pay) {
             if (confirm("Deseja alterar a situação dessa conta?")) {
-                BillPay.update({ id: bill_pay.id }, bill_pay);
+                BillPayResource.update({ id: bill_pay.id }, bill_pay);
             }
         },
         openModalDestroy (bill_receive) {
@@ -84,7 +85,7 @@ module.exports = {
     },
     events: {
         "destroy-bill": function (bill) {
-            BillPay.delete({ id: bill.id }).then(() => {
+            BillPayResource.delete({ id: bill.id }).then(() => {
                 this.bill_pays.$remove(bill);
 
                 Materialize.toast("Conta excluída com sucesso!", 4000);

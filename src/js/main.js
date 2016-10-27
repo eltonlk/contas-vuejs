@@ -1,80 +1,70 @@
-require("./bootstrap");
+import "./bootstrap";
 
-require([
-    "./components/bill-pay/bill-pay.component",
-    "./components/bill-pay/bill-pay-create.component",
-    "./components/bill-pay/bill-pay-list.component",
-    "./components/bill-receive/bill-receive.component",
-    "./components/bill-receive/bill-receive-create.component",
-    "./components/bill-receive/bill-receive-list.component",
-    "./components/dashboard.component",
-    "./components/main.component"
-], function (
-    billPayComponent,
-    billPayCreateComponent,
-    billPayListComponent,
-    billReceiveComponent,
-    billReceiveCreateComponent,
-    billReceiveListComponent,
-    dashboardComponent,
-    mainComponent
-) {
-    let VueRouter = require("vue-router");
-    let router = new VueRouter();
+import VueRouter from "vue-router";
 
-    router.map({
-        "/bill-pays": {
-            name: "bill-pay",
-            component: billPayComponent,
-            subRoutes: {
-                "/": {
-                    name: "bill-pay.list",
-                    component: billPayListComponent
-                },
-                "/create": {
-                    name: "bill-pay.create",
-                    component: billPayCreateComponent
-                },
-                "/:id/update": {
-                    name: "bill-pay.update",
-                    component: billPayCreateComponent
-                }
+import BillPayComponent from "./components/bill-pay/bill-pay.component";
+import BillPayCreateComponent from "./components/bill-pay/bill-pay-create.component";
+import BillPayListComponent from "./components/bill-pay/bill-pay-list.component";
+import BillReceiveComponent from "./components/bill-receive/bill-receive.component";
+import BillReceiveCreateComponent from "./components/bill-receive/bill-receive-create.component";
+import BillReceiveListComponent from "./components/bill-receive/bill-receive-list.component";
+import DashboardComponent from "./components/dashboard.component";
+import MainComponent from "./components/main.component";
+
+let router = new VueRouter();
+
+router.map({
+    "/bill-pays": {
+        name: "bill-pay",
+        component: BillPayComponent,
+        subRoutes: {
+            "/": {
+                name: "bill-pay.list",
+                component: BillPayListComponent
+            },
+            "/create": {
+                name: "bill-pay.create",
+                component: BillPayCreateComponent
+            },
+            "/:id/update": {
+                name: "bill-pay.update",
+                component: BillPayCreateComponent
             }
-        },
-        "/bill-receives": {
-            name: "bill-receive",
-            component: billReceiveComponent,
-            subRoutes: {
-                "/": {
-                    name: "bill-receive.list",
-                    component: billReceiveListComponent
-                },
-                "/create": {
-                    name: "bill-receive.create",
-                    component: billReceiveCreateComponent
-                },
-                "/:id/update": {
-                    name: "bill-receive.update",
-                    component: billReceiveCreateComponent
-                }
+        }
+    },
+    "/bill-receives": {
+        name: "bill-receive",
+        component: BillReceiveComponent,
+        subRoutes: {
+            "/": {
+                name: "bill-receive.list",
+                component: BillReceiveListComponent
+            },
+            "/create": {
+                name: "bill-receive.create",
+                component: BillReceiveCreateComponent
+            },
+            "/:id/update": {
+                name: "bill-receive.update",
+                component: BillReceiveCreateComponent
             }
-        },
-        "/dashboard": {
-            name: "dashboard",
-            component: dashboardComponent
-        },
-        "*": {
-            component: dashboardComponent
         }
-    });
-
-    router.redirect({
-        "*": "/dashboard"
-    });
-
-    router.start({
-        components: {
-            "main-component": mainComponent
-        }
-    }, "#app");
+    },
+    "/dashboard": {
+        name: "dashboard",
+        component: DashboardComponent
+    },
+    "*": {
+        component: DashboardComponent
+    }
 });
+
+router.redirect({
+    "*": "/dashboard"
+});
+
+router.start({
+    components: {
+        "main-component": MainComponent
+    }
+}, "#app");

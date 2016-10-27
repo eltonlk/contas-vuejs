@@ -27,19 +27,25 @@ Install composer dependencies
 ## Commands
 
 Run FrontEnd
+
     lite-server
 
 Run Babel compile
+
     npm run babel
 
 Run SASS compile
+
     npm run sass
 
 Run SASS compile watch
+
     npm run sass:w
 
 Run gulp copy roboto fonts
+
     gulp
 
 Run webpack watch
+
     webpack --watch

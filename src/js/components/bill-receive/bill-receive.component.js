@@ -1,8 +1,8 @@
-let billReceiveMenuComponent = require("./bill-receive-menu.component");
+import BillReceiveMenuComponent from "./bill-receive-menu.component";
 
-module.exports = {
+export default {
     components: {
-        "bill-receive-menu-component": billReceiveMenuComponent
+        "bill-receive-menu-component": BillReceiveMenuComponent
     },
     template: `
         <div class="section">

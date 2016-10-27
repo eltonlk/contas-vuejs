@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     created () {
         $(document).ready(() => {
             $(".button-collapse").sideNav({ closeOnClick: true });

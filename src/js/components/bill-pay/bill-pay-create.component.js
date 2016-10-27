@@ -1,4 +1,7 @@
-/* global BillPay, Materialize */
+/* global Materialize */
+
+import {Bill} from "../../bill";
+import {BillPayResource} from "../../resources";
 
 const payNames = [
     "CONTA DE LUZ",
@@ -10,9 +13,7 @@ const payNames = [
     "GASOLINA"
 ];
 
-let Bill = require("../../bill");
-
-module.exports = {
+export default {
     template: `
         <div class="container">
             <form @submit.prevent="submit">
@@ -64,13 +65,13 @@ module.exports = {
     methods: {
         submit () {
             if (this.action === "create") {
-                BillPay.save({}, this.bill_pay.toJSON()).then(() => {
+                BillPayResource.save({}, this.bill_pay.toJSON()).then(() => {
                     this.$router.go({ name: "bill-pay.list" });
 
                     Materialize.toast("Conta criada com sucesso!", 4000);
                 });
             } else {
-                BillPay.update({ id: this.bill_pay.id }, this.bill_pay.toJSON()).then(() => {
+                BillPayResource.update({ id: this.bill_pay.id }, this.bill_pay.toJSON()).then(() => {
                     this.$router.go({ name: "bill-pay.list" });
 
                     Materialize.toast("Conta atualizada com sucesso!", 4000);
@@ -78,7 +79,7 @@ module.exports = {
             }
         },
         getBillPay (id) {
-            BillPay.get({ id: id }).then((response) => {
+            BillPayResource.get({ id: id }).then((response) => {
                 this.bill_pay = new Bill(response.data);
             });
         }

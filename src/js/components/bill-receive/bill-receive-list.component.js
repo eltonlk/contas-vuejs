@@ -1,10 +1,11 @@
-/* global BillReceive, Materialize */
+/* global Materialize */
 
-let confirmBillDestroyComponent = require("../confirm-bill-destroy.component");
+import {BillReceiveResource} from "../../resources";
+import ConfirmBillDestroyComponent from "../confirm-bill-destroy.component";
 
-module.exports = {
+export default {
     components: {
-        "confirm-bill-destroy": confirmBillDestroyComponent
+        "confirm-bill-destroy": ConfirmBillDestroyComponent
     },
     template: `
         <div class="container">
@@ -50,14 +51,14 @@ module.exports = {
         };
     },
     created () {
-        BillReceive.query().then((response) => {
+        BillReceiveResource.query().then((response) => {
             this.bill_receives = response.data;
         });
     },
     methods: {
         changeDoneBillReceive (bill_receive) {
             if (confirm("Deseja alterar a situação dessa conta?")) {
-                BillReceive.update({ id: bill_receive.id }, bill_receive);
+                BillReceiveResource.update({ id: bill_receive.id }, bill_receive);
             }
         },
         openModalDestroy (bill_receive) {
@@ -84,7 +85,7 @@ module.exports = {
     },
     events: {
         "destroy-bill": function (bill) {
-            BillReceive.delete({ id: bill.id }).then(() => {
+            BillReceiveResource.delete({ id: bill.id }).then(() => {
                 this.bill_receives.$remove(bill);
 
                 Materialize.toast("Conta excluída com sucesso!", 4000);

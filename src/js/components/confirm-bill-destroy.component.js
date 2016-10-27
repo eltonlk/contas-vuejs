@@ -1,10 +1,6 @@
-let modalComponent = require("./modal.component");
-let Bill = require("../bill");
+import {Bill} from "../bill";
 
-module.exports = {
-    components: {
-        "modal": modalComponent
-    },
+export default {
     data () {
         return {
             modal: {
@@ -26,18 +22,18 @@ module.exports = {
         }
     },
     template: `
-        <modal :modal="modal">
-            <div slot="content" v-if="bill">
+        <div :id="modal.id" class="modal">
+            <div class="modal-content" v-if="bill">
                 <h5 class="center-align">Deseja excluir esta conta?</h5>
                 <div class="divider"></div>
                 <p>Nome: <strong>{{ bill.name | upcase }}</strong></p>
                 <p>Valor: <strong>{{ bill.value | numberToCurrency 'pt-BR' }}</strong></p>
                 <p>Data de vencimento: <strong>{{ bill.date_due | dateLocalize 'ko-KR' }}</strong></p>
             </div>
-            <div slot="footer">
+            <div class="modal-footer">
                 <button class="btn btn-flat waves-effect modal-close modal-action" @click="confirm()">OK</button>
                 <button class="btn btn-flat waves-effect modal-close modal-action">Cancelar</button>
             </div>
-        </modal>
+        </div>
     `
 };

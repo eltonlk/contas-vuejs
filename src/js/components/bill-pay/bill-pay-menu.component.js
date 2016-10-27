@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     template: `
         <a class="waves-effect waves-light btn" v-link="{ name: 'bill-pay.create' }">
             <i class="material-icons left">add</i>Adicionar

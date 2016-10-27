@@ -1,8 +1,8 @@
-let billPayMenuComponent = require("./bill-pay-menu.component");
+import BillPayMenuComponent from "./bill-pay-menu.component";
 
-module.exports = {
+export default {
     components: {
-        "bill-pay-menu-component": billPayMenuComponent
+        "bill-pay-menu-component": BillPayMenuComponent
     },
     template: `
         <div class="section">

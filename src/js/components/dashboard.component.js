@@ -1,6 +1,6 @@
-/* global BillPay, BillReceive */
+import {BillPayResource, BillReceiveResource} from "../resources";
 
-module.exports = {
+export default {
     template: `
         <div class="container">
             <div class="section">
@@ -40,11 +40,11 @@ module.exports = {
         };
     },
     created () {
-        BillPay.total().then((response) => {
+        BillPayResource.total().then((response) => {
             this.totalPays = response.data.total;
         });
 
-        BillReceive.total().then((response) => {
+        BillReceiveResource.total().then((response) => {
             this.totalReceives = response.data.total;
         });
     }

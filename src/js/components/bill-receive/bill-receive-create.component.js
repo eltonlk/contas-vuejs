@@ -1,4 +1,7 @@
-/* global BillReceive, Materialize */
+/* global Materialize */
+
+import {Bill} from "../../bill";
+import {BillReceiveResource} from "../../resources";
 
 const receiveNames = [
     "SALÁRIO",
@@ -7,9 +10,7 @@ const receiveNames = [
     "FÉRIAS"
 ];
 
-let Bill = require("../../bill");
-
-module.exports = {
+export default {
     template: `
         <div class="container">
             <form @submit.prevent="submit">
@@ -61,13 +62,13 @@ module.exports = {
     methods: {
         submit () {
             if (this.action === "create") {
-                BillReceive.save({}, this.bill_receive.toJSON()).then(() => {
+                BillReceiveResource.save({}, this.bill_receive.toJSON()).then(() => {
                     this.$router.go({ name: "bill-receive.list" });
 
                     Materialize.toast("Conta criada com sucesso!", 4000);
                 });
             } else {
-                BillReceive.update({ id: this.bill_receive.id }, this.bill_receive.toJSON()).then(() => {
+                BillReceiveResource.update({ id: this.bill_receive.id }, this.bill_receive.toJSON()).then(() => {
                     this.$router.go({ name: "bill-receive.list" });
 
                     Materialize.toast("Conta atualizada com sucesso!", 4000);
@@ -75,7 +76,7 @@ module.exports = {
             }
         },
         getBillReceive (id) {
-            BillReceive.get({ id: id }).then((response) => {
+            BillReceiveResource.get({ id: id }).then((response) => {
                 this.bill_receive = new Bill(response.data);
             });
         }
